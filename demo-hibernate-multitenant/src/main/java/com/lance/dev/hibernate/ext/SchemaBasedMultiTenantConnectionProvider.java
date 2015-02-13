@@ -5,6 +5,7 @@ import com.lance.dev.hibernate.common.ApplicationContextUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.service.jdbc.connections.spi.MultiTenantConnectionProvider;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -15,15 +16,16 @@ import java.sql.SQLException;
  * @since 2014/12/19
  */
 @Component
+@Lazy
 public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConnectionProvider {
     private static Logger logger = LogManager.getLogger();
     private final String DEFAULT_SCHEMA = "qhdevelop18";
 
     //    private final DriverManagerConnectionProviderImpl connectionProvider = new DriverManagerConnectionProviderImpl();
-    private static DruidDataSource dataSource;
+    private DruidDataSource druidDataSource;
 
     public SchemaBasedMultiTenantConnectionProvider() {
-        dataSource = (DruidDataSource) ApplicationContextUtils.getBean("dataSource");
+        druidDataSource = (DruidDataSource) ApplicationContextUtils.getBean("dataSource");
     }
 
 //    ConnectionProvider cp =
@@ -39,7 +41,7 @@ public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConn
     @Override
     public Connection getAnyConnection() throws SQLException {
         logger.debug("-----getAnyConnection--------{}");
-        return dataSource.getConnection();
+        return druidDataSource.getConnection();
 
 //            return entityManager.unwrap(Connection.class);
 //            final Connection connection = connectionProvider.getConnection();
@@ -71,7 +73,7 @@ public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConn
     @Override
     public Connection getConnection(String tenantIdentifier) throws SQLException {
         logger.debug("-----getConnection tenantIdentifier--------{}", tenantIdentifier);
-        final Connection connection = dataSource.getConnection();
+        final Connection connection = druidDataSource.getConnection();
         connection.createStatement().execute(String.format("USE %s", tenantIdentifier));
 
         return connection;
@@ -140,11 +142,11 @@ public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConn
         return null;
     }
 
-    public static DruidDataSource getDataSource() {
-        return dataSource;
+    public DruidDataSource getDruidDataSource() {
+        return druidDataSource;
     }
 
-    public static void setDataSource(DruidDataSource dataSource) {
-        SchemaBasedMultiTenantConnectionProvider.dataSource = dataSource;
+    public void setDruidDataSource(DruidDataSource druidDataSource) {
+        this.druidDataSource = druidDataSource;
     }
 }

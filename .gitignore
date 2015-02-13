@@ -63,3 +63,6 @@ demo-hibernate-multitenant/hibernate.multitenant.iml
 *.log
 *.iml
 *.iml
+*.xml
+demo-hibernate-multitenant/target/classes/db-common.properties
+demo-hibernate-multitenant/target/classes/db-connection.properties

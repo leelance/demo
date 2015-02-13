@@ -29,6 +29,7 @@
         <servlet.version>3.1.0</servlet.version>
         <testng.version>6.1.1</testng.version>
         <jetty.version>9.2.2.v20140723</jetty.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>

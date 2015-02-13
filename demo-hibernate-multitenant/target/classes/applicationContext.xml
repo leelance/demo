@@ -5,7 +5,6 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-       xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/tx	http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
@@ -15,17 +14,10 @@
 
     <!-- 自动扫描分包 -->
     <context:component-scan base-package="com.lance.dev.hibernate">
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
     <!--数据库连接配置-->
-    <!--
-    几经周折，主要因为兼容性的问题，取消spring的profile模式。采用各自的db-connection.properties，
-    该文件不上传指git服务器（已在.gitignore中添加）。需要连接什么数据库直接在该文件
-    中进行选择/注释。以后就不要再修改spring的这个配置文件了。
-
-    by Tanliang, 2014-6-18
-    -->
     <context:property-placeholder
             ignore-unresolvable="true"
             location="classpath*:/db-common.properties,
@@ -85,16 +77,9 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"/>
         <property name="packagesToScan" value="com.lance.dev.hibernate.entity"/>
-        <!--待扫描的实体类包，不再需要persistence.xml了-->
         <property name="jpaProperties">
             <props>
-                <!--<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>-->
-                <!--增加了命名策略，分几种情况：
-                 @Table 可以不用写name, 表名自动加tms_
-                 @ManyToOne 和 @OneToOne 的情况下，只要写@JoinColumn ，属性名自动加前缀fk_作为字段名
-                 @ManyToOne双向，用mappedBy，命名策略同上
-                单向OneToMany和有关联表的情况下，比较复杂，自己命名
-                -->
+                <prop key="hibernate.ejb.naming_strategy">com.lance.dev.hibernate.common.TMSJPAImprovedNamingStrategy</prop>
                 <!--<prop key="hibernate.use_sql_comments">true</prop>-->
                 <!--<prop key="hibernate.format_sql">true</prop>-->
                 <prop key="hibernate.show_sql">true</prop>
@@ -103,8 +88,8 @@
 
                 <!--Multi Tenancy-->
                 <prop key="hibernate.multiTenancy">SCHEMA</prop>
-                <prop key="hibernate.tenant_identifier_resolver">com.bredtan.devbook.multitenancy.ext.TenantIdResolver</prop>
-                <prop key="hibernate.multi_tenant_connection_provider">com.bredtan.devbook.multitenancy.ext.SchemaBasedMultiTenantConnectionProvider</prop>
+                <prop key="hibernate.tenant_identifier_resolver">com.lance.dev.hibernate.ext.TenantIdResolver</prop>
+                <prop key="hibernate.multi_tenant_connection_provider">com.lance.dev.hibernate.ext.SchemaBasedMultiTenantConnectionProvider</prop>
             </props>
         </property>
     </bean>

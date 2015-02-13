@@ -9,35 +9,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "t_marriage_enum")
-public class MarriageEnumEntity {
-    /**
-     * 主键ID
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(length = 30)
-    protected String id;
-
-    @Column(length = 30)
-    protected String instanceSeqId;
-
-    @Column(length = 30)
-    protected String createdById;
-
-    @Column(length = 50)
-    protected String createdByName;
-
-    protected Date createdDate;
-
-    @Column(length = 30)
-    protected String updatedById;
-
-    @Column(length = 50)
-    protected String updatedByName;
-
-    protected Date updatedDate;
-    /**企业名称*/
-    protected String companyName;
+public class MarriageEnumEntity extends TMSBaseEntity{
     /**编号*/
     protected String serialNumber;
     /**名称*/
@@ -61,78 +33,6 @@ public class MarriageEnumEntity {
     protected int dictionaryKey;
 
     private boolean selected;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getInstanceSeqId() {
-        return instanceSeqId;
-    }
-
-    public void setInstanceSeqId(String instanceSeqId) {
-        this.instanceSeqId = instanceSeqId;
-    }
-
-    public String getCreatedById() {
-        return createdById;
-    }
-
-    public void setCreatedById(String createdById) {
-        this.createdById = createdById;
-    }
-
-    public String getCreatedByName() {
-        return createdByName;
-    }
-
-    public void setCreatedByName(String createdByName) {
-        this.createdByName = createdByName;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public String getUpdatedById() {
-        return updatedById;
-    }
-
-    public void setUpdatedById(String updatedById) {
-        this.updatedById = updatedById;
-    }
-
-    public String getUpdatedByName() {
-        return updatedByName;
-    }
-
-    public void setUpdatedByName(String updatedByName) {
-        this.updatedByName = updatedByName;
-    }
-
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
 
     public String getSerialNumber() {
         return serialNumber;

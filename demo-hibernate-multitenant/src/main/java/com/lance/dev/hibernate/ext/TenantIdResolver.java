@@ -5,11 +5,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author Tan Liang (Bred Tan)
  * @since 2014/12/19
  */
 public class TenantIdResolver implements CurrentTenantIdentifierResolver {
     private static Logger logger = LoggerFactory.getLogger(TenantIdResolver.class);
+    private String tenant = "qhdevelop18";
 
     /**
      * Resolve the current tenant identifier.
@@ -19,7 +19,7 @@ public class TenantIdResolver implements CurrentTenantIdentifierResolver {
     @Override
     public String resolveCurrentTenantIdentifier() {
         //return MultiTenancyApp.TenantIdentifier;
-        return null;
+        return tenant;
     }
 
     /**
@@ -33,5 +33,9 @@ public class TenantIdResolver implements CurrentTenantIdentifierResolver {
     @Override
     public boolean validateExistingCurrentSessions() {
         return false;
+    }
+
+    public void setTenant(String tenant) {
+        this.tenant = tenant;
     }
 }

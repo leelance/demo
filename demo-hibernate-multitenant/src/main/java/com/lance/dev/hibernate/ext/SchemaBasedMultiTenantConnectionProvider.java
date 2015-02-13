@@ -57,7 +57,7 @@ public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConn
          */
         @Override
         public void releaseAnyConnection(Connection connection) throws SQLException {
-            connection.createStatement().execute("USE devbook");
+            connection.createStatement().execute("USE qhdevelop18");
             connection.close();
 //            entityManager.unwrap(Connection.class).close();
         }
@@ -89,7 +89,7 @@ public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConn
          */
         @Override
         public void releaseConnection(String tenantIdentifier, Connection connection) throws SQLException {
-            connection.createStatement().execute("USE devbook");
+            connection.createStatement().execute("USE qhdevelop18");
 //            entityManager.unwrap(Connection.class).close();
         }
 

@@ -57,3 +57,9 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+*.iml
+*.iml
+demo-hibernate-multitenant/hibernate.multitenant.iml
+*.log
+*.iml
+*.iml

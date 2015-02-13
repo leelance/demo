@@ -14,7 +14,7 @@
     <url>http://maven.apache.org</url>
 
     <properties>
-        <hibernate.version>4.2.18.Final</hibernate.version>
+        <hibernate.version>4.3.8.Final</hibernate.version>
     </properties>
 
     <!-- dependency -->

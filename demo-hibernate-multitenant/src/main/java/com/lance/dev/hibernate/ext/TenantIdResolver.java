@@ -1,12 +1,16 @@
 package com.lance.dev.hibernate.ext;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 
 /**
  * @since 2014/12/19
  */
 public class TenantIdResolver implements CurrentTenantIdentifierResolver {
+    private static Logger logger = LogManager.getLogger(TenantIdResolver.class);
+    public final String DEFAULT_SCHEMA = "qhdevelop18";
     public static ThreadLocal<String> threadLocal = new ThreadLocal<>();
 
     /**
@@ -16,10 +20,12 @@ public class TenantIdResolver implements CurrentTenantIdentifierResolver {
      */
     @Override
     public String resolveCurrentTenantIdentifier() {
+        logger.debug("----------resolveCurrentTenantIdentifier----------{}", threadLocal.get());
         if(StringUtils.isNotBlank(threadLocal.get())) {
             return threadLocal.get();
         }
-        return null;
+
+        return DEFAULT_SCHEMA;
     }
 
     /**
@@ -32,6 +38,7 @@ public class TenantIdResolver implements CurrentTenantIdentifierResolver {
      */
     @Override
     public boolean validateExistingCurrentSessions() {
+        logger.debug("----------validateExistingCurrentSessions----------{}");
         return true;
     }
 

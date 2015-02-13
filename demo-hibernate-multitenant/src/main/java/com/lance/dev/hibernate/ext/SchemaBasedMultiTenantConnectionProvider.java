@@ -1,13 +1,13 @@
 package com.lance.dev.hibernate.ext;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.lance.dev.hibernate.common.ApplicationContextUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.service.jdbc.connections.spi.MultiTenantConnectionProvider;
+import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.EntityManager;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -18,19 +18,23 @@ import java.sql.SQLException;
 @Component
 @Lazy
 public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConnectionProvider {
-    private static Logger logger = LogManager.getLogger();
+    private static Logger logger = LogManager.getLogger(SchemaBasedMultiTenantConnectionProvider.class);
     private final String DEFAULT_SCHEMA = "qhdevelop18";
 
     //    private final DriverManagerConnectionProviderImpl connectionProvider = new DriverManagerConnectionProviderImpl();
-    private DruidDataSource druidDataSource;
+    private static DruidDataSource ds;
 
-    public SchemaBasedMultiTenantConnectionProvider() {
-        druidDataSource = (DruidDataSource) ApplicationContextUtils.getBean("dataSource");
+    public DruidDataSource getDataSource() {
+        return ds;
     }
 
+    public void setDataSource(DruidDataSource dataSource) {
+        ds = dataSource;
+    }
+
+    private EntityManager entityManager;
 //    ConnectionProvider cp =
 //    private final DriverManagerConnectionProviderImpl connectionProvider = ConnectionProviderUtils.buildConnectionProvider("master");
-
     /**
      * Allows access to the database metadata of the underlying database(s) in situations where we do not have a
      * tenant id (like startup processing, for example).
@@ -40,8 +44,8 @@ public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConn
      */
     @Override
     public Connection getAnyConnection() throws SQLException {
-        logger.debug("-----getAnyConnection--------{}");
-        return druidDataSource.getConnection();
+        logger.debug("----------getAnyConnection----------{}", ds);
+        return ds.getConnection();
 
 //            return entityManager.unwrap(Connection.class);
 //            final Connection connection = connectionProvider.getConnection();
@@ -56,7 +60,7 @@ public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConn
      */
     @Override
     public void releaseAnyConnection(Connection connection) throws SQLException {
-        logger.debug("-----releaseAnyConnection--------{}");
+        logger.debug("----------releaseAnyConnection----------");
         connection.createStatement().execute(String.format("USE %s", DEFAULT_SCHEMA));
         connection.close();
 //            entityManager.unwrap(Connection.class).close();
@@ -72,8 +76,8 @@ public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConn
      */
     @Override
     public Connection getConnection(String tenantIdentifier) throws SQLException {
-        logger.debug("-----getConnection tenantIdentifier--------{}", tenantIdentifier);
-        final Connection connection = druidDataSource.getConnection();
+        logger.debug("----------getConnection----------");
+        final Connection connection = ds.getConnection();
         connection.createStatement().execute(String.format("USE %s", tenantIdentifier));
 
         return connection;
@@ -90,7 +94,7 @@ public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConn
      */
     @Override
     public void releaseConnection(String tenantIdentifier, Connection connection) throws SQLException {
-        logger.debug("-----releaseConnection--------{}");
+        logger.debug("----------releaseConnection----------");
         connection.createStatement().execute(String.format("USE %s", DEFAULT_SCHEMA));
 //            entityManager.unwrap(Connection.class).close();
     }
@@ -113,7 +117,7 @@ public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConn
      */
     @Override
     public boolean supportsAggressiveRelease() {
-        logger.debug("-----supportsAggressiveRelease--------{}");
+        logger.debug("----------supportsAggressiveRelease----------");
         return false;
     }
 
@@ -125,7 +129,7 @@ public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConn
      */
     @Override
     public boolean isUnwrappableAs(Class unwrapType) {
-        logger.debug("-----isUnwrappableAs--------{}");
+        logger.debug("----------isUnwrappableAs----------");
         return false;
     }
 
@@ -138,15 +142,7 @@ public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConn
      */
     @Override
     public <T> T unwrap(Class<T> unwrapType) {
-        logger.debug("-----unwrap--------{}");
+        logger.debug("----------unwrap----------");
         return null;
-    }
-
-    public DruidDataSource getDruidDataSource() {
-        return druidDataSource;
-    }
-
-    public void setDruidDataSource(DruidDataSource druidDataSource) {
-        this.druidDataSource = druidDataSource;
     }
 }

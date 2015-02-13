@@ -49,6 +49,9 @@
 	</Appenders>
 
 	<Loggers>
+		<AsyncLogger name="com.lance.dev.hibernate" level="debug">
+			<AppenderRef ref="console" />
+		</AsyncLogger>
 		<!-- 全局配置，默认所有的Logger都继承此配置 -->
 		<AsyncRoot level="info">
 			<AppenderRef ref="console" />

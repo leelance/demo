@@ -1,9 +1,9 @@
 package com.lance.dev.hibernate.ext;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.service.jdbc.connections.spi.MultiTenantConnectionProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
@@ -15,8 +15,8 @@ import java.sql.SQLException;
  * @since 2014/12/19
  */
 @Component
-public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConnectionProvider {//,Stoppable, Configurable,ServiceRegistryAwareService {
-    private static Logger logger = LoggerFactory.getLogger(SchemaBasedMultiTenantConnectionProvider.class);
+public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConnectionProvider {
+    private static Logger logger = LogManager.getLogger();
 
 //    private final DriverManagerConnectionProviderImpl connectionProvider = new DriverManagerConnectionProviderImpl();
 
@@ -72,6 +72,7 @@ public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConn
          */
         @Override
         public Connection getConnection(String tenantIdentifier) throws SQLException {
+            logger.debug("-----tenantIdentifier--------{}", tenantIdentifier);
             final Connection connection = ds.getConnection();
             connection.createStatement().execute("USE " + tenantIdentifier);
 

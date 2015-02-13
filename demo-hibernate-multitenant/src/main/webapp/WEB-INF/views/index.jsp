@@ -47,5 +47,14 @@
         </div>
     </div>
 </div>
+
+<script src="static/js/jquery-1.7.2.min.js"></script>
+<script>
+    $(function(){
+        $('select').on('change',function(e) {
+            window.location.href = "change/"+this.value;
+        });
+    });
+</script>
 </body>
 </html>

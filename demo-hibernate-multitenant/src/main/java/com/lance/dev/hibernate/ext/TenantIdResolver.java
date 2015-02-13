@@ -1,5 +1,6 @@
 package com.lance.dev.hibernate.ext;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,7 @@ import org.slf4j.LoggerFactory;
  * @since 2014/12/19
  */
 public class TenantIdResolver implements CurrentTenantIdentifierResolver {
+    public static ThreadLocal<String> threadLocal = new ThreadLocal<>();
     private static Logger logger = LoggerFactory.getLogger(TenantIdResolver.class);
     private String tenant = "qhdevelop18";
 
@@ -18,7 +20,9 @@ public class TenantIdResolver implements CurrentTenantIdentifierResolver {
      */
     @Override
     public String resolveCurrentTenantIdentifier() {
-        //return MultiTenancyApp.TenantIdentifier;
+        if(StringUtils.isNotBlank(threadLocal.get())) {
+            return threadLocal.get();
+        }
         return tenant;
     }
 

@@ -1,8 +1,10 @@
 package com.lance.dev.hibernate.web;
 
+import com.lance.dev.hibernate.ext.TenantIdResolver;
 import com.lance.dev.hibernate.service.MarriageEnumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,5 +22,12 @@ public class IndexController {
     public String index(HttpServletRequest request) {
         request.setAttribute("marries",marriageEnumService.findAll());
         return "index.jsp";
+    }
+
+    @RequestMapping("change/{name}")
+    public String changeTenant(@PathVariable String name) {
+        new TenantIdResolver().threadLocal.set(name);
+        //redirect.addFlashAttribute("marries",marriageEnumService.findAll());
+        return "redirect:/index";
     }
 }

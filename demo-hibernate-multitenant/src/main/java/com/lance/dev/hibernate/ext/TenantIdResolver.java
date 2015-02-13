@@ -2,16 +2,12 @@ package com.lance.dev.hibernate.ext;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @since 2014/12/19
  */
 public class TenantIdResolver implements CurrentTenantIdentifierResolver {
     public static ThreadLocal<String> threadLocal = new ThreadLocal<>();
-    private static Logger logger = LoggerFactory.getLogger(TenantIdResolver.class);
-    private String tenant = "qhdevelop18";
 
     /**
      * Resolve the current tenant identifier.
@@ -23,7 +19,7 @@ public class TenantIdResolver implements CurrentTenantIdentifierResolver {
         if(StringUtils.isNotBlank(threadLocal.get())) {
             return threadLocal.get();
         }
-        return tenant;
+        return null;
     }
 
     /**
@@ -36,10 +32,10 @@ public class TenantIdResolver implements CurrentTenantIdentifierResolver {
      */
     @Override
     public boolean validateExistingCurrentSessions() {
-        return false;
+        return true;
     }
 
     public void setTenant(String tenant) {
-        this.tenant = tenant;
+        threadLocal.set(tenant);
     }
 }

@@ -26,7 +26,7 @@ public class IndexController {
 
     @RequestMapping("change/{name}")
     public String changeTenant(@PathVariable String name) {
-        new TenantIdResolver().threadLocal.set(name);
+        new TenantIdResolver().setTenant(name);
         //redirect.addFlashAttribute("marries",marriageEnumService.findAll());
         return "redirect:/index";
     }

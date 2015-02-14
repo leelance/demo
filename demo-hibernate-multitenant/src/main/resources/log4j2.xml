@@ -17,6 +17,9 @@
 		<Logger name="com.lance.dev.hibernate" level="debug" additivity="false">
 			<AppenderRef ref="Console" />
 		</Logger>
+		<Logger name="org.hibernate" level="info" additivity="false">
+			<AppenderRef ref="Console" />
+		</Logger>
 
 		<Root level="error">
 			<AppenderRef ref="Console" />

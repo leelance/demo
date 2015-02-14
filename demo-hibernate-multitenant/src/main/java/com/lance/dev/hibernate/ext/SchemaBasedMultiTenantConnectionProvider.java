@@ -3,6 +3,7 @@ package com.lance.dev.hibernate.ext;
 import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.cfg.Environment;
 import org.hibernate.engine.config.spi.ConfigurationService;
 import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
@@ -81,8 +82,15 @@ public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConn
     public Connection getConnection(String tenantIdentifier) throws SQLException {
         logger.debug("----------getConnection----------");
         final Connection connection = getAnyConnection();
-        connection.createStatement().execute(String.format("USE %s", tenantIdentifier));
 
+        try {
+            connection.createStatement().execute(String.format("USE %s", tenantIdentifier));
+        }
+        catch ( SQLException e ) {
+            throw new HibernateException(
+                    "Could not alter JDBC connection to specified schema [" + tenantIdentifier + "]",e
+            );
+        }
         return connection;
     }
 

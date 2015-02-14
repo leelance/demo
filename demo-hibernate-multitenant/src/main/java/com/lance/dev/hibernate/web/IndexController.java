@@ -1,6 +1,6 @@
 package com.lance.dev.hibernate.web;
 
-import com.lance.dev.hibernate.ext.TenantIdResolver;
+import com.lance.dev.hibernate.common.ContextHolder;
 import com.lance.dev.hibernate.service.MarriageEnumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ public class IndexController {
 
     @RequestMapping("change/{name}")
     public String changeTenant(@PathVariable String name) {
-        new TenantIdResolver().setTenant(name);
+        ContextHolder.setContext(name);
         //redirect.addFlashAttribute("marries",marriageEnumService.findAll());
         return "redirect:/index";
     }

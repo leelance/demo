@@ -3,13 +3,19 @@ package com.lance.dev.hibernate.ext;
 import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.cfg.Environment;
+import org.hibernate.engine.config.spi.ConfigurationService;
+import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
+import org.hibernate.service.UnknownUnwrapTypeException;
+import org.hibernate.service.spi.ServiceRegistryAwareService;
+import org.hibernate.service.spi.ServiceRegistryImplementor;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityManager;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Map;
 
 /**
  * @author Tan Liang (Bred Tan)
@@ -17,22 +23,12 @@ import java.sql.SQLException;
  */
 @Component
 @Lazy
-public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConnectionProvider {
+public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConnectionProvider, ServiceRegistryAwareService {
     private static Logger logger = LogManager.getLogger(SchemaBasedMultiTenantConnectionProvider.class);
-    private final String DEFAULT_SCHEMA = "qhdevelop18";
+    public final String DEFAULT_SCHEMA = "qhdevelop18";
 
     //    private final DriverManagerConnectionProviderImpl connectionProvider = new DriverManagerConnectionProviderImpl();
-    private static DruidDataSource ds;
-
-    public DruidDataSource getDataSource() {
-        return ds;
-    }
-
-    public void setDataSource(DruidDataSource dataSource) {
-        ds = dataSource;
-    }
-
-    private EntityManager entityManager;
+    private DruidDataSource ds;
 //    ConnectionProvider cp =
 //    private final DriverManagerConnectionProviderImpl connectionProvider = ConnectionProviderUtils.buildConnectionProvider("master");
     /**
@@ -50,6 +46,13 @@ public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConn
 //            return entityManager.unwrap(Connection.class);
 //            final Connection connection = connectionProvider.getConnection();
 //            return connection;
+    }
+
+    @Override
+    public void injectServices(ServiceRegistryImplementor serviceRegistryImplementor) {
+        logger.debug("----------injectServices----------{}", serviceRegistryImplementor);
+        Map setting = serviceRegistryImplementor.getService(ConfigurationService.class).getSettings();
+        ds = (DruidDataSource)setting.get(Environment.DATASOURCE);
     }
 
     /**
@@ -77,11 +80,10 @@ public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConn
     @Override
     public Connection getConnection(String tenantIdentifier) throws SQLException {
         logger.debug("----------getConnection----------");
-        final Connection connection = ds.getConnection();
+        final Connection connection = getAnyConnection();
         connection.createStatement().execute(String.format("USE %s", tenantIdentifier));
 
         return connection;
-//            return null;
     }
 
     /**
@@ -130,7 +132,9 @@ public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConn
     @Override
     public boolean isUnwrappableAs(Class unwrapType) {
         logger.debug("----------isUnwrappableAs----------");
-        return false;
+        return ConnectionProvider.class.equals( unwrapType )
+                ||  MultiTenantConnectionProvider.class.equals( unwrapType )
+                ||  SchemaBasedMultiTenantConnectionProvider.class.isAssignableFrom( unwrapType );
     }
 
     /**
@@ -143,6 +147,10 @@ public class SchemaBasedMultiTenantConnectionProvider implements MultiTenantConn
     @Override
     public <T> T unwrap(Class<T> unwrapType) {
         logger.debug("----------unwrap----------");
-        return null;
+        if ( isUnwrappableAs( unwrapType ) ) {
+            return (T) this;
+        }else {
+            throw new UnknownUnwrapTypeException( unwrapType );
+        }
     }
 }

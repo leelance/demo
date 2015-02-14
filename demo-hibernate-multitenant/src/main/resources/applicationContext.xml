@@ -23,9 +23,9 @@
             location="classpath*:/db-common.properties,
                 classpath*:/db-connection.properties"/>
 
-    <bean id="schemaBasedMultiTenantConnectionProvider" class="com.lance.dev.hibernate.ext.SchemaBasedMultiTenantConnectionProvider" lazy-init="false" >
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
+   <!-- <bean id="schemaBasedMultiTenantConnectionProvider" class="com.lance.dev.hibernate.ext.SchemaBasedMultiTenantConnectionProvider" lazy-init="false" >
+        <property name="ds" ref="dataSource"/>
+    </bean>-->
 
     <!-- 数据源 -->
     <!--see https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_DruidDataSource%E5%8F%82%E8%80%83%E9%85%8D%E7%BD%AE-->
@@ -102,6 +102,7 @@
     <!-- Jpa 事务配置 -->
     <bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
+        <property name="dataSource" ref="dataSource"/>
     </bean>
     <tx:annotation-driven transaction-manager="jpaTransactionManager" proxy-target-class="true"/>
 

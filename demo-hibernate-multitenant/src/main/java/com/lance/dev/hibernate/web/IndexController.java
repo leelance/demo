@@ -30,7 +30,7 @@ public class IndexController {
 
     @RequestMapping("change/{name}")
     public String changeTenant(@PathVariable String name) {
-        ContextHolder.setContext(name);
+        ContextHolder.newInstance().setContext(name);
         userServiceImpl.setTenantId(name);
         //redirect.addFlashAttribute("marries",marriageEnumService.findAll());
         return "redirect:/index";

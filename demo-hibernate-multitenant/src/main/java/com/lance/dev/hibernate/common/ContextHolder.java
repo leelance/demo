@@ -7,23 +7,27 @@ import org.apache.logging.log4j.Logger;
  * @author lance
  * @since 2015/2/14 12:37.
  */
-public abstract class ContextHolder {
-
+public class ContextHolder {
     private static final Logger logger = LogManager.getLogger(ContextHolder.class);
-    private static final ThreadLocal<String> holder = new ThreadLocal<>();
+    private ThreadLocal<String> holder = new ThreadLocal<>();
 
-    public static void setContext(final String context) {
+    private ContextHolder(){}
+
+    public static ContextHolder newInstance() {
+        return ContextHolderHelper.instance;
+    }
+
+    public void setContext(final String context) {
         logger.debug("context set '{}', Current threadName: {}", context, Thread.currentThread().getName());
         holder.set(context);
     }
 
-    public static String getContext() {
+    public String getContext() {
         logger.debug("context get '{}', Current threadName: {}", holder.get(), Thread.currentThread().getName());
         return holder.get();
     }
 
-    public static void clear() {
-        logger.debug("context cleared");
-        holder.remove();
+    private static class ContextHolderHelper{
+        private static final ContextHolder instance = new ContextHolder();
     }
 }

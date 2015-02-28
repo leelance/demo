@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
  * @since 2015/2/28 17:51.
  */
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl{
     public String tenantId = "qhdevelop18";
 
     public String getTenantId() {

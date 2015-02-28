@@ -23,7 +23,7 @@
             <select class="form-control">
                 <option value="qhdevelop18">qhdevelop18</option>
                 <option value="qihangedu">qihangedu</option>
-                <option value="qhdevelop0210">qhdevelop0210</option>
+                <option value="qhdevelop18">qhdevelop18</option>
                 <option value="qhdevelop102">qhdevelop102</option>
                 <option value="qhdevelop106">qhdevelop106</option>
             </select>
@@ -41,6 +41,7 @@
                         <td>${marry.instanceSeqId}</td>
                         <td>${marry.companyName}</td>
                         <td>${marry.enumValue}</td>
+                        <td>${marry.description}</td>
                     </tr>
                 </c:forEach>
             </table>

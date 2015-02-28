@@ -2,6 +2,7 @@ package com.lance.dev.hibernate.ext;
 
 import com.lance.dev.hibernate.common.ApplicationContextUtils;
 import com.lance.dev.hibernate.service.UserService;
+import com.lance.dev.hibernate.service.UserServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,7 +27,7 @@ public class TenantIdResolver implements CurrentTenantIdentifierResolver {
         if(StringUtils.isNotBlank(ContextHolder.getContext())) {
             return ContextHolder.getContext();
         }*/
-        UserService userService = (UserService)ApplicationContextUtils.getBean("userService");
+        UserServiceImpl userService = (UserServiceImpl)ApplicationContextUtils.getBean("userServiceImpl");
         logger.debug("----------resolveCurrentTenantIdentifier----------{}", userService.getTenantId());
         if(StringUtils.isNotBlank(userService.getTenantId())) {
             return userService.getTenantId();

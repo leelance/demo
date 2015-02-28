@@ -22,7 +22,7 @@
         <div class="col-md-2">
             <select class="form-control">
                 <option value="qhdevelop18">qhdevelop18</option>
-                <option value="qhdevelop0202">qhdevelop0202</option>
+                <option value="qihangedu">qihangedu</option>
                 <option value="qhdevelop0210">qhdevelop0210</option>
                 <option value="qhdevelop102">qhdevelop102</option>
                 <option value="qhdevelop106">qhdevelop106</option>

@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 public abstract class ContextHolder {
 
     private static final Logger logger = LogManager.getLogger(ContextHolder.class);
-    private static final ThreadLocal<String> holder = new ThreadLocal<String>();
+    private static final ThreadLocal<String> holder = new ThreadLocal<>();
 
     public static void setContext(final String context) {
         logger.debug("context set '{}'", context);

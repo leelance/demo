@@ -1,6 +1,7 @@
 package com.lance.dev.hibernate.ext;
 
-import com.lance.dev.hibernate.common.ContextHolder;
+import com.lance.dev.hibernate.common.ApplicationContextUtils;
+import com.lance.dev.hibernate.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,6 +13,7 @@ import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 public class TenantIdResolver implements CurrentTenantIdentifierResolver {
     private static Logger logger = LogManager.getLogger(TenantIdResolver.class);
     public final String DEFAULT_SCHEMA = "qhdevelop18";
+    private boolean validateExistingCurrentSessions = true;
 
     /**
      * Resolve the current tenant identifier.
@@ -20,9 +22,14 @@ public class TenantIdResolver implements CurrentTenantIdentifierResolver {
      */
     @Override
     public String resolveCurrentTenantIdentifier() {
-        logger.debug("----------resolveCurrentTenantIdentifier----------{}", ContextHolder.getContext());
+       /* logger.debug("----------resolveCurrentTenantIdentifier----------{}", ContextHolder.getContext());
         if(StringUtils.isNotBlank(ContextHolder.getContext())) {
             return ContextHolder.getContext();
+        }*/
+        UserService userService = (UserService)ApplicationContextUtils.getBean("userService");
+        logger.debug("----------resolveCurrentTenantIdentifier----------{}", userService.getTenantId());
+        if(StringUtils.isNotBlank(userService.getTenantId())) {
+            return userService.getTenantId();
         }
 
         return DEFAULT_SCHEMA;
@@ -39,6 +46,14 @@ public class TenantIdResolver implements CurrentTenantIdentifierResolver {
     @Override
     public boolean validateExistingCurrentSessions() {
         logger.debug("----------validateExistingCurrentSessions----------{}");
-        return true;
+        return validateExistingCurrentSessions;
+    }
+
+    public boolean isValidateExistingCurrentSessions() {
+        return validateExistingCurrentSessions;
+    }
+
+    public void setValidateExistingCurrentSessions(boolean validateExistingCurrentSessions) {
+        this.validateExistingCurrentSessions = validateExistingCurrentSessions;
     }
 }

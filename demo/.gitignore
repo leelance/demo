@@ -3,6 +3,7 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 .idea/
+.settings/
 
 # Package Files #
 *.jar
@@ -29,6 +30,7 @@ hs_err_pid*
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
+.project
 
 # Directories potentially created on remote AFP share
 .AppleDB

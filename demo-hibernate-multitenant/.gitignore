@@ -24,6 +24,7 @@ hs_err_pid*
 .DS_Store
 .AppleDouble
 .LSOverride
+.classpath
 
 # Thumbnails
 ._*

@@ -13,7 +13,7 @@
        default-lazy-init="true">
 
     <!-- 自动扫描分包 -->
-    <context:component-scan base-package="com.lance.dev.hibernate">
+    <context:component-scan base-package="com.lance.dev">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
@@ -22,10 +22,6 @@
             ignore-unresolvable="true"
             location="classpath*:/db-common.properties,
                 classpath*:/db-connection.properties"/>
-
-   <!-- <bean id="schemaBasedMultiTenantConnectionProvider" class="com.lance.dev.hibernate.ext.SchemaBasedMultiTenantConnectionProvider" lazy-init="false" >
-        <property name="ds" ref="dataSource"/>
-    </bean>-->
 
     <!-- 数据源 -->
     <!--see https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_DruidDataSource%E5%8F%82%E8%80%83%E9%85%8D%E7%BD%AE-->
@@ -66,49 +62,6 @@
         <property name="filters" value="${druid.filters}"/>
     </bean>
 
-
-
     <!-- 加入AOP -->
     <aop:aspectj-autoproxy/>
-
-    <!-- 配置JPA -->
-    <!-- JPA实体管理工厂的配置 -->
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" depends-on="schemaBasedMultiTenantConnectionProvider">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"/>
-        <property name="packagesToScan" value="com.lance.dev.hibernate.entity"/>
-        <property name="jpaProperties">
-            <props>
-                <prop key="hibernate.ejb.naming_strategy">com.lance.dev.hibernate.common.TMSJPAImprovedNamingStrategy</prop>
-                <!--<prop key="hibernate.use_sql_comments">true</prop>-->
-                <!--<prop key="hibernate.format_sql">true</prop>-->
-                <prop key="hibernate.show_sql">true</prop>
-                <!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
-                <!--<prop key="hibernate.connection.autocommit">false</prop>-->
-
-                <!--Multi Tenancy-->
-                <prop key="hibernate.multiTenancy">SCHEMA</prop>
-                <prop key="hibernate.tenant_identifier_resolver">com.lance.dev.hibernate.ext.TenantIdResolver</prop>
-                <prop key="hibernate.multi_tenant_connection_provider">com.lance.dev.hibernate.ext.SchemaBasedMultiTenantConnectionProvider</prop>
-            </props>
-        </property>
-    </bean>
-
-    <!--指定实现JPA的适配器-->
-    <bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-        <property name="databasePlatform" value="org.hibernate.dialect.MySQL5Dialect"/>
-    </bean>
-
-    <!-- Jpa 事务配置 -->
-    <bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory"/>
-    </bean>
-    <tx:annotation-driven transaction-manager="jpaTransactionManager" proxy-target-class="true"/>
-
-    <!-- Spring Data Jpa配置 -->
-    <jpa:repositories base-package="com.lance.dev.hibernate.**.repository"
-                      transaction-manager-ref="jpaTransactionManager"
-                      entity-manager-factory-ref="entityManagerFactory"
-                      repository-impl-postfix="Impl"
-            />
 </beans>

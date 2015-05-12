@@ -63,7 +63,7 @@ demo-hibernate-multitenant/hibernate.multitenant.iml
 *.log
 *.iml
 *.iml
-*.xml
+
 demo-hibernate-multitenant/target/classes/db-common.properties
 demo-hibernate-multitenant/target/classes/db-connection.properties
 demo-hibernate-multitenant/target/tmp/jsp/org/apache/jsp/WEB_002dINF/views/index_jsp.java

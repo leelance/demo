@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemesh>
 	<!-- Exclude path from decoration. -->
-	<mapping path="/resource/*" exclue="true" />
+	<mapping path="/static/*" exclude="true" />
 
 	<mapping path="/user/*" decorator="/WEB-INF/common/index.jsp"></mapping>
 </sitemesh>

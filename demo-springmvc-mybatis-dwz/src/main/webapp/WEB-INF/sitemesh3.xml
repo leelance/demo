@@ -2,6 +2,7 @@
 <sitemesh>
 	<!-- Exclude path from decoration. -->
 	<mapping path="/static/*" exclude="true" />
-
-	<mapping path="/user/*" decorator="/WEB-INF/common/index.jsp"></mapping>
+	
+	<!-- 首页 -->
+	<mapping path="/user/index" decorator="/WEB-INF/common/index.jsp"></mapping>
 </sitemesh>

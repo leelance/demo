@@ -45,8 +45,8 @@ $(function(){
 			<div class="headerNav">
 				<a class="logo" href="javascript:void(0)">Logo</a>
 				<ul class="nav">
-					<li><a href="<c:url value='/'/>" target="website">Home</a></li>
-					<li><a href="<c:url value='/passport/logout'/>">Log out</a></li>
+					<li><a href="" target="website">Home</a></li>
+					<li><a href="">Log out</a></li>
 				</ul>
 			</div>
 		</div>
@@ -66,7 +66,7 @@ $(function(){
 					</div>
 					<div class="accordionContent">
 						<ul class="tree treeFolder">
-							<li><a href="" target="navTab" rel="websiteNav">创建客户</a></li>
+							<li><a href="${ctx}/user/add" target="navTab">创建客户</a></li>
 							<li><a href="#" target="navTab" rel="pageLiNav">客户列表</a></li>
 						</ul>
 					</div>

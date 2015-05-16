@@ -7,8 +7,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("user/")
 public class IndexController {
 	
+	/**
+	 * 跳转首页
+	 * @return
+	 */
 	@RequestMapping("index")
 	public String index(){
 		return "user/index";
+	}
+	
+	/**
+	 * 添加用户
+	 * @return
+	 */
+	@RequestMapping("add")
+	public String add(){
+		return "user/add";
 	}
 }

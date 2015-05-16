@@ -9,21 +9,29 @@
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
 <title>首页</title>
 
+<!-- DWZ.css -->
 <link href="${ctx}/static/dwz/themes/default/style.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}/static/dwz/themes/css/core.css" rel="stylesheet" type="text/css" />
+<!-- KindEditor.css -->
+<link rel="stylesheet" href="${ctx}/static/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="${ctx}/static/kindeditor/plugins/code/prettify.css" />
 
 <!--[if IE]>
 <link href="<c:url value='/styles/dwz/themes/css/ieHack.css'/>" rel="stylesheet" type="text/css" />
 <![endif]-->
-
+<!-- JQuery -->
 <script src="${ctx}/static/dwz/js/speedup.js" type="text/javascript"></script>
 <script src="${ctx}/static/dwz/js/jquery-1.7.2.js" type="text/javascript"></script>
 <script src="${ctx}/static/dwz/js/jquery.cookie.js" type="text/javascript"></script>
 <script src="${ctx}/static/dwz/js/jquery.validate.js" type="text/javascript"></script>
 <script src="${ctx}/static/dwz/js/jquery.bgiframe.js" type="text/javascript"></script>
-
+<!-- DWZ.js -->
 <script src="${ctx}/static/dwz/js/dwz.min.js" type="text/javascript"></script>
 <script src="${ctx}/static/dwz/js/dwz.regional.zh.js" type="text/javascript"></script>
+<!-- KindEditor.js -->
+<script src="${ctx}/static/kindeditor/kindeditor-min.js" type="text/javascript"></script>
+<script src="${ctx}/static/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<script src="${ctx}/static/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
 </head>
 <script type="text/javascript">
 $(function(){
@@ -118,8 +126,6 @@ $(function(){
 
 	</div>
 	
-	<div id="footer"><fmt:message key="ui.copyrights" /></div>
-
-
+	<div id="footer">https://github.com/leelance?tab=repositories</div>
 </body>
 </html>

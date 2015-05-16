@@ -44,6 +44,11 @@
 			<label>上传头像：</label>
 			<input type="file" name="portraitImg"/>
 		</div>
+		<div class="unit">
+			<label>备注：</label>
+			<textarea id="reamrk" name="remark" class="kindeditor" style="width: 680px; height: 200px;
+                                visibility: hidden;"></textarea>			
+		</div>
 	</div>
 	<div class="formBar">
 		<ul>

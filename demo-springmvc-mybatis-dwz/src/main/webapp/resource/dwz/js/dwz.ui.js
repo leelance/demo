@@ -107,10 +107,10 @@ function initUI(_box) {
     }
     //kindEditor
     $("textarea.kindeditor", $p).each(function() {
+    	var $thiz = $(this);
         $.getScript(ctx+'/static/kindeditor/kindeditor-min.js', function() {
             KindEditor.basePath = ctx+'/static/kindeditor/';
-            // KindEditor.create('textarea[name="content"]');
-            var editor1 = KindEditor.create('#content', {
+            var editor1 = KindEditor.create($thiz, {
                 cssPath: ctx+'/static/kindeditor/plugins/code/prettify.css',
                 allowFileManager: true,
                 items: [

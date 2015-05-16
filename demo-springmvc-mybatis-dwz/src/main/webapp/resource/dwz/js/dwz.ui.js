@@ -105,7 +105,7 @@ function initUI(_box) {
             $this.xheditor(op);
         });
     }
-    //kindEditor
+    //kindEditor文本编辑器
     $("textarea.kindeditor", $p).each(function() {
     	var $thiz = $(this);
         $.getScript(ctx+'/static/kindeditor/kindeditor-min.js', function() {
@@ -135,8 +135,34 @@ function initUI(_box) {
             prettyPrint();
         });
     });
-
-
+    
+    //kindEditor上传文件
+    $("input.ke-input-text", $p).each(function() {
+    	var $thiz = $(this), _id = $thiz.attr("id");
+    	$.getScript(ctx+'/static/kindeditor/kindeditor-min.js', function() {
+    		var uploadbutton = KindEditor.uploadbutton({
+				button : KindEditor('#'+_id+"Btn"),
+				fieldName : 'imgFile',
+				url : '../php/upload_json.php?dir=file',
+				afterUpload : function(data) {
+					if (data.error === 0) {
+						var url = K.formatUrl(data.url, 'absolute');
+						$thiz.val(url);
+					} else {
+						alert(data.message);
+					}
+				},
+				afterError : function(str) {
+					alert('自定义错误信息: ' + str);
+				}
+			});
+			uploadbutton.fileBox.change(function(e) {
+				uploadbutton.submit();
+			});
+            
+            prettyPrint();
+        });
+    });
     if ($.fn.uploadify) {
         $(":file[uploader]", $p).each(function() {
             var $this = $(this);

@@ -42,7 +42,8 @@
 		</div>
 		<div class="unit">
 			<label>上传头像：</label>
-			<input type="file" name="portraitImg"/>
+			<input class="ke-input-text" type="text" id="portrait" value="" readonly="readonly" />
+			<input type="button" id="portraitBtn" value="Upload" />
 		</div>
 		<div class="unit">
 			<label>备注：</label>

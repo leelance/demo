@@ -27,6 +27,7 @@
 <script src="${ctx}/static/dwz/js/jquery.bgiframe.js" type="text/javascript"></script>
 <!-- DWZ.js -->
 <script src="${ctx}/static/dwz/js/dwz.min.js" type="text/javascript"></script>
+<script src="${ctx}/static/dwz/js/dwz.ui.js" type="text/javascript"></script>
 <script src="${ctx}/static/dwz/js/dwz.regional.zh.js" type="text/javascript"></script>
 <!-- KindEditor.js -->
 <script src="${ctx}/static/kindeditor/kindeditor-min.js" type="text/javascript"></script>
@@ -34,6 +35,7 @@
 <script src="${ctx}/static/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
 </head>
 <script type="text/javascript">
+var ctx = "${ctx}";
 $(function(){
 	DWZ.init("${ctx}/static/dwz/dwz.frag.xml", {
 		//loginTitle:"Login",	// 弹出登录对话框

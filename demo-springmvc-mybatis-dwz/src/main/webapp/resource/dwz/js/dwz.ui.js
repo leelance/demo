@@ -146,8 +146,8 @@ function initUI(_box) {
 				url : ctx+'/upload?dir=file',
 				afterUpload : function(data) {
 					if (data.error === 0) {
-						var url = K.formatUrl(data.url, 'absolute');
-						$thiz.val(url);
+						//var url = KindEditor.formatUrl(data.url, 'absolute');
+						$thiz.val(data.url);
 					} else {
 						alert(data.message);
 					}

@@ -143,7 +143,7 @@ function initUI(_box) {
     		var uploadbutton = KindEditor.uploadbutton({
 				button : KindEditor('#'+_id+"Btn"),
 				fieldName : 'imgFile',
-				url : '../php/upload_json.php?dir=file',
+				url : ctx+'/upload?dir=file',
 				afterUpload : function(data) {
 					if (data.error === 0) {
 						var url = K.formatUrl(data.url, 'absolute');

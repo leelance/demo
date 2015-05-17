@@ -29,10 +29,12 @@ demo example file
             prettyPrint();
         });
     });
-    
-    <div class="unit">
-			<label>上传身份证：</label>
-			<input class="ke-input-text" type="text" id="card" value="" readonly="readonly" />
-			<input type="button" id="cardBtn" value="上传身份证" />
-		</div>
  ```
+## html
+```
+<div class="unit">
+	<label>上传身份证：</label>
+	<input class="ke-input-text" type="text" id="card" value="" readonly="readonly" />
+	<input type="button" id="cardBtn" value="上传身份证" />
+</div>
+```

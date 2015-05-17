@@ -5,6 +5,7 @@
 .idea/
 .settings/
 bin/
+logs/
 
 # Package Files #
 *.jar

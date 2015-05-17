@@ -43,7 +43,12 @@
 		<div class="unit">
 			<label>上传头像：</label>
 			<input class="ke-input-text" type="text" id="portrait" value="" readonly="readonly" />
-			<input type="button" id="portraitBtn" value="Upload" />
+			<input type="button" id="portraitBtn" value="上传头像" />
+		</div>
+		<div class="unit">
+			<label>上传身份证：</label>
+			<input class="ke-input-text" type="text" id="card" value="" readonly="readonly" />
+			<input type="button" id="cardBtn" value="上传身份证" />
 		</div>
 		<div class="unit">
 			<label>备注：</label>

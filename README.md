@@ -1,5 +1,4 @@
-# demo
-demo example file
+# demo-springmvc-mybatis-dwz
 ## js
  ```
  //KindEditor.uploadbutton上传文件

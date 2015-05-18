@@ -1,4 +1,6 @@
 # demo-springmvc-mybatis-dwz
+dwz加入kindeditor部分插件, 如: 富文本编辑器, 上传文件插件, 由于dwz集成的是uploadify flash类型插件
+当一个页面很多个上传附件插件时, 会出现页面渲染缓慢
 ## js
  ```
  //KindEditor.uploadbutton上传文件

@@ -335,31 +335,6 @@ function initUI(_box) {
     if ($.fn.pagerForm) $("form[rel=pagerForm]", $p).pagerForm({ parentBox: $p });
 
     // 这里放其他第三方jQuery插件...
-
-    /*KindEditor.ready(function(K) {
-        var editor1 = K.create('#content', {
-            cssPath: '../../kindeditor/plugins/code/prettify.css',
-            allowFileManager: true,
-            items: [
-						'preview', '|', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-						'removeformat', 'lineheight', 'strikethrough', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-						'insertunorderedlist', 'indent', 'outdent', 'quickformat', '|', 'image', 'hr', 'baidumap', 'link', '|', 'about'],
-            afterCreate: function() {
-                var self = this;
-                K.ctrl(document, 13, function() {
-                    self.sync();
-                    K('form[name=example]')[0].submit();
-                });
-                K.ctrl(self.edit.doc, 13, function() {
-                    self.sync();
-                    K('form[name=example]')[0].submit();
-                }); K('button[name=getHtml]').click(function(e) {
-                    document.getElementById("NewsContentC").value = editor1.html();
-                });
-            }
-        });
-        prettyPrint();
-    });*/
 }
 
 

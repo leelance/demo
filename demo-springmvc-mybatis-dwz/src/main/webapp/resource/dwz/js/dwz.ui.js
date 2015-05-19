@@ -53,7 +53,10 @@ function initLayout() {
     $("#sidebar, #sidebar_s .collapse, #splitBar, #splitBarProxy").height(iContentH - 5);
     $("#taskbar").css({ top: iContentH + $("#header").height() + 5, width: $(window).width() });
 }
-
+/**
+ * 初始化UI
+ * @param _box
+ */
 function initUI(_box) {
     var $p = $(_box || document);
 

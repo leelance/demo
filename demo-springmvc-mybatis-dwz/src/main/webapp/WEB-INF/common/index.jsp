@@ -25,7 +25,7 @@
 <script src="${ctx}/static/dwz/js/jquery.cookie.js" type="text/javascript"></script>
 <script src="${ctx}/static/dwz/js/jquery.validate.js" type="text/javascript"></script>
 <script src="${ctx}/static/dwz/js/jquery.bgiframe.js" type="text/javascript"></script>
-<!-- DWZ.js -->
+<!-- DWZ.js 注意dwz.min和dwz.ui加载顺序-->
 <script src="${ctx}/static/dwz/js/dwz.min.js" type="text/javascript"></script>
 <script src="${ctx}/static/dwz/js/dwz.ui.js" type="text/javascript"></script>
 <script src="${ctx}/static/dwz/js/dwz.regional.zh.js" type="text/javascript"></script>

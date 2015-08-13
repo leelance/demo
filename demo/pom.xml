@@ -10,11 +10,19 @@
 	<name>demo::root</name>
 	<url>http://maven.apache.org</url>
 
+<<<<<<< Updated upstream
 	<!-- modules -->
 	<modules>
 		<module>../demo-hibernate-multitenant</module>
 		<module>../demo-springmvc-mybatis-dwz</module>
 	</modules>
+=======
+    <!-- modules -->
+    <modules>
+        <module>../demo-hibernate-multitenant</module>
+        <module>../demo-lucene</module>
+    </modules>
+>>>>>>> Stashed changes
 
 	<developers>
 		<developer>

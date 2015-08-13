@@ -10,19 +10,13 @@
 	<name>demo::root</name>
 	<url>http://maven.apache.org</url>
 
-<<<<<<< Updated upstream
+
 	<!-- modules -->
 	<modules>
 		<module>../demo-hibernate-multitenant</module>
 		<module>../demo-springmvc-mybatis-dwz</module>
+		<module>../demo-lucene</module>
 	</modules>
-=======
-    <!-- modules -->
-    <modules>
-        <module>../demo-hibernate-multitenant</module>
-        <module>../demo-lucene</module>
-    </modules>
->>>>>>> Stashed changes
 
 	<developers>
 		<developer>
@@ -187,17 +181,22 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.7</source>
+					<target>1.7</target>
 					<encoding>${project.build.sourceEncoding}</encoding>
 					<useIncrementalCompilation>false</useIncrementalCompilation>
 				</configuration>
 			</plugin>
 			<!-- jetty插件, 设定context path与spring profile -->
 			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
+				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>8.1.0.v20120127</version>
+				<version>9.3.0.v20150612</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.6</version>
 			</plugin>
 		</plugins>
 	</build>

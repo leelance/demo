@@ -1,15 +1,18 @@
 package com.lance.dev.entity;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
 
 /**
  * Created by lance
- *
  * @since 2015-08-15 23:29
  */
 
 public abstract class BaseEntity {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private String creator;

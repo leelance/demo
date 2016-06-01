@@ -26,12 +26,12 @@
 	</developers>
 	<!-- version -->
 	<properties>
-		<spring.version>4.2.0.RELEASE</spring.version>
-		<log4j2.version>2.1</log4j2.version>
-		<druid.version>1.0.7</druid.version>
+		<spring.version>4.2.6.RELEASE</spring.version>
+		<log4j2.version>2.6</log4j2.version>
+		<druid.version>1.0.20</druid.version>
 		<mysql.version>5.1.29</mysql.version>
 		<servlet.version>3.1.0</servlet.version>
-		<testng.version>6.1.1</testng.version>
+		<testng.version>6.9.10</testng.version>
 		<jetty.version>9.0.0.v20130308</jetty.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -164,11 +164,18 @@
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>${testng.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

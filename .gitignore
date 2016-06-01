@@ -4,6 +4,7 @@
 .mtj.tmp/
 .metadata/
 RemoteSystemsTempFiles/
+.recommenders/
 
 # Package Files #
 *.jar

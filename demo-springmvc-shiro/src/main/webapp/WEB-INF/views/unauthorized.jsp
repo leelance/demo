@@ -17,10 +17,7 @@
     <![endif]-->
   </head>
   <body>
-    <h1>你好，世界！</h1>
-    
-	<a href="/logout">Exit</a>
-	
+    <h1>Unauthorized！</h1>
 	
 	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <script src="/resources/base/js/bootstrap.min.js"></script>

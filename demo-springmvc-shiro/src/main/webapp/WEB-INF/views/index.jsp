@@ -8,8 +8,7 @@
     <title>首页</title>
 
     <!-- Bootstrap -->
-    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="/resources/base/css/bootstrap.min.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -21,6 +20,7 @@
     <h1>你好，世界！</h1>
 	
 	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-    <script src="/resources/js/bootstrap.min.js"></script>
+    <script src="/resources/base/js/bootstrap.min.js"></script>
+    <script src="/resources/layer/layer.js"></script>
   </body>
 </html>

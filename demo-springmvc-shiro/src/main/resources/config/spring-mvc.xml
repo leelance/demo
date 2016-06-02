@@ -41,4 +41,5 @@
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/"/>
 	</bean>
+	<mvc:view-controller path="/"/>
 </beans>

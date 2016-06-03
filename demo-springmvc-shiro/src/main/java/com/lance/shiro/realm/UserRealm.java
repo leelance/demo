@@ -6,6 +6,7 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
@@ -24,6 +25,8 @@ public class UserRealm extends AuthorizingRealm{
 	
 	public UserRealm() {
 		setName("UserRealm");
+		//采用MD5加密
+		setCredentialsMatcher(new HashedCredentialsMatcher("md5"));
 	}
 
 	@Override

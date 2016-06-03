@@ -87,5 +87,13 @@ body {
 	<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 	<script src="/resources/base/js/bootstrap.min.js"></script>
 	<script src="/resources/layer/layer.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var errorText = '${errorText}';
+		if(!!errorText) {
+			layer.alert(errorText);
+		}
+	});
+</script>
 </body>
 </html>

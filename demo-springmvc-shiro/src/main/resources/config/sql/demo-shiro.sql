@@ -75,8 +75,8 @@ CREATE TABLE `t_user` (
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES ('1', 'lance', '123456', 'Lance', '2016-06-02 23:35:38');
-INSERT INTO `t_user` VALUES ('2', 'admin', '12346', 'Admin', '2016-06-01 23:35:17');
+INSERT INTO `t_user` VALUES ('1', 'lance', 'e10adc3949ba59abbe56e057f20f883e', 'Lance', '2016-06-02 23:35:38');
+INSERT INTO `t_user` VALUES ('2', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'Admin', '2016-06-01 23:35:17');
 
 -- ----------------------------
 -- Table structure for `t_user_role`

@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>首页</title>
+    <title>Dashboard</title>
 
     <!-- Bootstrap -->
     <link href="/resources/base/css/bootstrap.min.css" rel="stylesheet">
@@ -28,11 +28,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="/index"> Welcome, <shiro:principal/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
+            <li><a href="/index">Dashboard</a></li>
             <li><a href="#">Settings</a></li>
             <li><a href="#">Profile</a></li>
             <li><a href="#">Help</a></li>
@@ -49,9 +49,9 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="/index">Overview <span class="sr-only">(current)</span></a></li>
             <shiro:hasPermission name="Reports">
-            	<li><a href="#">Reports</a></li>
+            	<li><a href="/reports">Reports</a></li>
             </shiro:hasPermission>
             <shiro:hasPermission name="Analytics">
             	<li><a href="#">Analytics</a></li>

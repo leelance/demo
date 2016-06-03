@@ -43,28 +43,34 @@
 		<property name="arguments" ref="securityManager"/>
 	</bean>
 	
-	<!-- 自定义URL拦截 
-    <bean id="urlPermissionsFilter" class="com.longchou.bid.common.shiro.URLPermissionsFilter"/>
-    -->
+	<!-- 自定义URL拦截 -->
+    <bean id="urlPermissionsFilter" class="com.lance.shiro.realm.URLPermissionsFilter"/>
+    
     
 	<!-- Shiro Filter -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/login"/>
 		<property name="unauthorizedUrl" value="/unauthorized"/>
-		<property name="successUrl" value="/index"></property>
+		<property name="filters">
+			<util:map>
+				<entry key="perms" value-ref="urlPermissionsFilter"/>
+			</util:map>
+		</property>
 		<property name="filterChainDefinitions">
 			<!-- 这里就是简单的分为： 1）匿名可以访问的登录页 2）任何可访问的退出页 3）剩余的需要认证后才能访问。 对于remember me的情况（即user），暂时不予考虑。 -->
 			<value>
-				/login* = anon
-				/logout* = logout
+				/login = anon
+				/favicon.ico=anon
+				/unauthorized=anon
+				/logout = logout
 				/**/*.js = anon
 				/**/*.css = anon
 				/**/*.html = anon
 				/**/*.jpg = anon
 				/**/*.jpeg = anon
 				/**/*.png = anon
-				/** = authc
+				/** = authc,perms
 			</value>
 		</property>
 	</bean>

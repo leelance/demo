@@ -23,4 +23,13 @@ public class IndexController {
 	public String unauthorized() {
 		return "unauthorized.jsp";
 	}
+	
+	/**
+	 * reports
+	 * @return
+	 */
+	@RequestMapping("reports")
+	public String reports() {
+		return "reports.jsp";
+	}
 }

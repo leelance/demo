@@ -5,6 +5,10 @@ import java.util.Date;
 
 public class ModuleInfo implements Serializable{
 	private static final long serialVersionUID = -4297656027873404254L;
+	/**路径*/
+	public static final int URL_TYPE=1;
+	/**功能点*/
+	public static final int FUNCTION_TYPE=2;
 
 	private int id;
 	private String moduleName;

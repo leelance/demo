@@ -6,6 +6,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.lance.shiro.mapper.UserMapper;
 import com.lance.shiro.model.ModuleInfo;
@@ -41,5 +42,23 @@ public class UserServiceImpl implements UserService {
 			set.add(info.getModuleKey());
 		}
 		return set;
+	}
+
+	/**
+	 * 获取URL权限
+	 * @param account
+	 * @return
+	 */
+	public List<String> findPermissionUrl(String account) {
+		List<String> list = Lists.newArrayList();
+		UserInfo user = findByAccount(account);
+		List<ModuleInfo>modules = moduleService.findModuleByUserId(user.getId());
+		
+		for(ModuleInfo info: modules) {
+			if(info.getModuleType() == ModuleInfo.URL_TYPE) {
+				list.add(info.getModulePath());
+			}
+		}
+		return list;
 	}
 }

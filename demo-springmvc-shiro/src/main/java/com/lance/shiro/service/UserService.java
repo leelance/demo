@@ -1,5 +1,6 @@
 package com.lance.shiro.service;
 
+import java.util.List;
 import java.util.Set;
 
 import com.lance.shiro.model.UserInfo;
@@ -19,4 +20,11 @@ public interface UserService {
 	 * @return
 	 */
 	Set<String> findPermissions(String account);
+	
+	/**
+	 * 获取URL权限
+	 * @param account
+	 * @return
+	 */
+	List<String> findPermissionUrl(String account);
 }

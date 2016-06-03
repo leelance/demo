@@ -3,7 +3,7 @@
 <mapper namespace="com.lance.shiro.mapper.ModuleMapper">
 
 	<!-- 获取角色模块 -->
-	<select id="findModuleKey" resultType="ModuleInfo">
+	<select id="findModuleByUserId" resultType="ModuleInfo">
 		select e.*
 		from t_user_role b
 		left join t_role c on b.role_id=c.id

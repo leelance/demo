@@ -1,13 +1,12 @@
-package com.lance.shiro.mapper;
+package com.lance.shiro.service;
 
 import java.util.List;
 
 import com.lance.shiro.model.ModuleInfo;
 
-public interface ModuleMapper {
-
+public interface ModuleService {
 	/**
-	 * 获取该人的权限模块
+	 * 获取角色模块
 	 * @param userId
 	 * @return
 	 */

@@ -27,7 +27,7 @@
         <property name="cacheManagerConfigFile" value="classpath:config/ehcache-shiro.xml" />
     </bean>
      -->
-     <!-- RedisCache -->
+    <!-- RedisCache -->
     <bean id="redisCacheManager" class="com.lance.shiro.realm.RedisCacheManager"/>
     
     <!-- 自定义UserRealm -->

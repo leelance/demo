@@ -63,4 +63,6 @@
 	<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">
 		<jdbc:script location="classpath:config/sql/demo-shiro.sql"/>
 	</jdbc:initialize-database>
+	
+	<import resource="config/jedis-shiro.xml"/>
 </beans>

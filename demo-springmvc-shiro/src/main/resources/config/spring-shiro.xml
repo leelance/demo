@@ -22,10 +22,13 @@
 		<property name="sessionValidationScheduler" ref="sessionValidationScheduler" />
 	</bean>
 	
-	<!-- 用户授权信息Cache, 采用EhCache -->
+	<!-- 用户授权信息Cache, 采用EhCache
     <bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
         <property name="cacheManagerConfigFile" value="classpath:config/ehcache-shiro.xml" />
     </bean>
+     -->
+     <!-- RedisCache -->
+    <bean id="redisCacheManager" class="com.lance.shiro.realm.RedisCacheManager"/>
     
     <!-- 自定义UserRealm -->
     <bean id="userRealm" class="com.lance.shiro.realm.UserRealm"/>
@@ -33,7 +36,7 @@
 	<!-- Shiro's main business-tier object for web-enabled applications -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="userRealm"/>
-		<property name="cacheManager" ref="shiroEhcacheManager" />
+		<property name="cacheManager" ref="redisCacheManager" />
 		<property name="sessionManager" ref="sessionManager" />
 	</bean>
 

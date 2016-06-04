@@ -41,11 +41,7 @@
 	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
 		<property name="staticMethod" value="org.apache.shiro.SecurityUtils.setSecurityManager" />
 		<property name="arguments" ref="securityManager"/>
-	</bean>
-	
-	<!-- 自定义URL拦截 -->
-    <bean id="urlPermissionsFilter" class="com.lance.shiro.realm.URLPermissionsFilter"/>
-    
+	</bean>    
     
 	<!-- Shiro Filter -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
@@ -54,7 +50,9 @@
 		<property name="unauthorizedUrl" value="/unauthorized"/>
 		<property name="filters">
 			<util:map>
-				<entry key="perms" value-ref="urlPermissionsFilter"/>
+				<entry key="perms">
+					<bean class="com.lance.shiro.realm.URLPermissionsFilter"/>
+				</entry>
 			</util:map>
 		</property>
 		<property name="filterChainDefinitions">

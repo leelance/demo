@@ -20,7 +20,7 @@ import com.lance.shiro.utils.SerializeUtils;
 public class RedisCache<K, V> implements Cache<K, V> {
 	private Logger log = LogManager.getLogger(getClass());
 	private RedisTemplate<byte[], V> redisTemplate;
-	private String prefix = "shiro_redis_session:";
+	private String prefix = "shiro_redis:";
 	
 	public RedisCache(RedisTemplate<byte[], V> redisTemplate) {
 		this.redisTemplate = redisTemplate;

@@ -1,5 +1,7 @@
 package com.lance.shiro.realm;
 
+import java.util.Set;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -36,7 +38,10 @@ public class UserRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		String username = (String) principals.getPrimaryPrincipal();
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+		//add Permission Resources
 		info.setStringPermissions(userService.findPermissions(username));
+		//add Roles String[Set<String> roles]
+		//info.setRoles(roles);
 		return info;
 	}
 	

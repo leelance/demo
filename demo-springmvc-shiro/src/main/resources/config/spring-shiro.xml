@@ -20,6 +20,7 @@
 		<property name="deleteInvalidSessions" value="true" />
 		<property name="sessionValidationSchedulerEnabled" value="true" />
 		<property name="sessionValidationScheduler" ref="sessionValidationScheduler" />
+		<property name="cacheManager" ref="redisCacheManager" />
 	</bean>
 	
 	<!-- 用户授权信息Cache, 采用EhCache

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd"
+		default-lazy-init="true">
+	<!-- 自动扫描分包 -->
+	<context:component-scan base-package="com.lance.bid">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
+	<!-- 属性文件 -->
+	<context:property-placeholder location="classpath*:/db-connection.properties"/>
+	
+	<!-- 数据源 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<!-- 基本属性 url、user、password -->
+		<property name="url" value="${connection.url}" />
+		<property name="username" value="${connection.username}"/>
+		<property name="password" value="${connection.password}"/>
+	</bean>
+	
+	<!-- 针对MyBatis配置 -->
+	<!-- 配置SqlSessionFactoryBean -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="typeAliasesPackage" value="com.lance.bid.model" />
+		<property name="mapperLocations" value="classpath*:mappers/**/*-mapper.xml" />
+		<!-- 1.3.0后基本配置文件 -->
+		<property name="configuration">
+	    <bean class="org.apache.ibatis.session.Configuration">
+	       <property name="mapUnderscoreToCamelCase" value="true"/>
+	       <property name="lazyLoadingEnabled" value="true"/>
+	       <property name="useGeneratedKeys" value="true"/>
+	       <property name="defaultStatementTimeout" value="25000"/>
+	       <property name="logImpl" value="org.apache.ibatis.logging.log4j2.Log4j2Impl"/>
+	    </bean>
+	  </property>
+	</bean>
+	
+	<!-- 通过扫描的模式 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.lance.bid.mapper" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+	
+	<!-- 数据源事务管理 -->
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<tx:annotation-driven transaction-manager="txManager" />
+	
+	<!-- 初始化脚本SQL -->
+	<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">
+		<jdbc:script location="classpath:config/sql/demo-schema.sql"/>
+	</jdbc:initialize-database>
+	
+	<import resource="config/jedis-config.xml"/>
+</beans>

@@ -4,11 +4,12 @@ import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lance.bid.mapper.BorrowMapper;
 import com.lance.bid.mapper.TenderMapper;
 import com.lance.bid.mapper.UserMapper;
-import com.lance.bid.model.BorrowInfo;
+import com.lance.bid.model.UserInfo;
 
 @Service
 public class TenderServiceImpl implements TenderService {
@@ -26,8 +27,17 @@ public class TenderServiceImpl implements TenderService {
 	 * @param borrowId		投的标id
 	 * @return
 	 */
+	@Transactional
 	public String tender(int tenderUserId, BigDecimal total, int borrowId) {
 		return null;
 	}
 
+	/**
+	 * 初始化用户
+	 * @param info
+	 */
+	@Transactional
+	public void initUser(UserInfo info) {
+		userMapper.save(info);
+	}
 }

@@ -47,8 +47,3 @@ CREATE TABLE `t_user` (
 -- Records of t_user
 -- ----------------------------
 INSERT INTO `t_user` VALUES ('1', 'borrow', '0.00', '0.00');
-INSERT INTO `t_user` VALUES ('2', 'tender1', '10000.00', '0.00');
-INSERT INTO `t_user` VALUES ('3', 'tender2', '10000.00', '0.00');
-INSERT INTO `t_user` VALUES ('4', 'tender3', '10000.00', '0.00');
-INSERT INTO `t_user` VALUES ('5', 'tender4', '10000.00', '0.00');
-INSERT INTO `t_user` VALUES ('6', 'tender5', '10000.00', '0.00');

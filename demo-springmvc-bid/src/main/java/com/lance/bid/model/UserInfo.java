@@ -10,6 +10,16 @@ public class UserInfo implements Serializable {
 	private String account;
 	private BigDecimal total;
 	private BigDecimal balance;
+
+	public UserInfo() {
+		
+	}
+	
+	public UserInfo(String account, BigDecimal total, BigDecimal balance) {
+		this.account = account;
+		this.total = total;
+		this.balance = balance;
+	}
 	
 	public int getId() {
 		return id;

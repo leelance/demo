@@ -10,6 +10,6 @@ public interface TenderMapper {
 	 * 插入数据
 	 * @param info
 	 */
-	@Insert(value="insert into(tender_user, tender_total)values(#{tenderUser},#{tenderTotal})")
+	@Insert(value="insert into t_tender(tender_user, tender_total)values(#{tenderUser},#{tenderTotal})")
 	void save(TenderInfo info);
 }

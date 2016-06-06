@@ -20,7 +20,7 @@ public interface UserMapper {
 	 * 插入数据
 	 * @param info
 	 */
-	@Insert(value="insert into(account, total, balance)values(#{account},#{total},#{balance})")
+	@Insert(value="insert into t_user(account, total, balance)values(#{account},#{total},#{balance})")
 	void save(UserInfo info);
 	
 	/**

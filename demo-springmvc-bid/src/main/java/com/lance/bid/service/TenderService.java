@@ -2,6 +2,8 @@ package com.lance.bid.service;
 
 import java.math.BigDecimal;
 
+import com.lance.bid.model.UserInfo;
+
 public interface TenderService {
 
 	/**
@@ -12,4 +14,10 @@ public interface TenderService {
 	 * @return
 	 */
 	String tender(int tenderUserId, BigDecimal total, int borrowId);
+	
+	/**
+	 * 初始化用户
+	 * @param info
+	 */
+	void initUser(UserInfo info);
 }

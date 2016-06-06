@@ -12,7 +12,7 @@
 
 	<artifactId>demo-springmvc-shiro</artifactId>
 	<packaging>war</packaging>
-	<name>demo-springmvc-shiro Maven Webapp</name>
+	<name>demo-springmvc-shiro</name>
 	<url>http://repo2.maven.org/maven2</url>
 
 	<properties>

@@ -10,6 +10,16 @@ public class TenderInfo implements Serializable {
 	private String tenderUser;
 	/**投标金额*/
 	private BigDecimal tenderTotal;
+	
+	public TenderInfo() {
+		
+	}
+	
+	public TenderInfo(String tenderUser, BigDecimal tenderTotal) {
+		this.tenderUser = tenderUser;
+		this.tenderTotal = tenderTotal;
+	}
+	
 	public int getId() {
 		return id;
 	}

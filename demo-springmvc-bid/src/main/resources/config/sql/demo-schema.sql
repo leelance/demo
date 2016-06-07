@@ -5,16 +5,17 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `t_borrow`;
 CREATE TABLE `t_borrow` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `borrow_name` varchar(50) DEFAULT NULL COMMENT '借款人姓名',
+  `borrow_user_name` varchar(50) DEFAULT NULL COMMENT '借款人姓名',
   `borrow_total` decimal(11,2) DEFAULT '0.00' COMMENT '借款金额',
-  `borrow_id` int(11) DEFAULT NULL,
+  `borrow_user_id` int(11) DEFAULT NULL,
+  `receive_total` decimal(11,2) DEFAULT '0.00' COMMENT '借款人收到投标人的金额',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_borrow
 -- ----------------------------
-INSERT INTO `t_borrow` VALUES ('1', 'borrow', '20000.00', '1');
+INSERT INTO `t_borrow` VALUES ('1', 'borrow', '20000.00', '1', '0.00');
 
 -- ----------------------------
 -- Table structure for `t_tender`

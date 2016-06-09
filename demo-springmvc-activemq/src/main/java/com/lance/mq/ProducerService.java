@@ -31,7 +31,6 @@ public class ProducerService {
 			public Message createMessage(Session session) throws JMSException {
 				return session.createTextMessage(message);
 			}
-			
 		});
 	}
 }

@@ -46,25 +46,16 @@
 		<constructor-arg index="0" value="queue"/>
 	</bean>
 	
-	<!-- 用于测试消息监听适配器的队列目的地 -->
-	<bean id="adapterQueue" class="org.apache.activemq.command.ActiveMQQueue">
-		<constructor-arg index="0" value="adapterQueue"/>
-	</bean>
-	<!-- 默认的消息回复队列 -->
-	<bean id="defaultResponseQueue" class="org.apache.activemq.command.ActiveMQQueue">
-		<constructor-arg index="0" value="defaultResponseQueue"/>
-	</bean>
-	
 	<!-- Listener -->
 	<bean id="consumerListener" class="com.lance.mq.ConsumerListener"/>
 	<bean id="messageListenerAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
 		<property name="delegate" ref="consumerListener"/>
 		<property name="defaultListenerMethod" value="receiveMessage"/>
-		<property name="defaultResponseDestination" ref="defaultResponseQueue"/>
+		<property name="defaultResponseDestination" ref="activeMQQueue"/>
 	</bean>
 	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory"/>
-		<property name="destination" ref="adapterQueue"/>
+		<property name="destination" ref="activeMQQueue"/>
 		<property name="messageListener" ref="messageListenerAdapter"/>
 	</bean>
 </beans>

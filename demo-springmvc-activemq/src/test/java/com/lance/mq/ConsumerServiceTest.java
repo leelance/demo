@@ -2,6 +2,7 @@ package com.lance.mq;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,15 @@ public class ConsumerServiceTest extends AbstractJUnit4SpringContextTests {
 	 * 测试接收消息队列消息
 	 */
 	@Test
+	@Ignore
 	public void receiveMessage() {
+		log.info("-------------receive Text----------");
 		consumerService.receiveQueueMessage();
+	}
+	
+	@Test
+	public void receiveObjMessage() {
+		log.info("-------------receive obj----------");
+		consumerService.receiveQueueObjMessage();
 	}
 }

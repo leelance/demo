@@ -1,5 +1,7 @@
 package com.lance.mq;
 
+import java.util.Random;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
@@ -17,8 +19,22 @@ public class ProducerServiceTest extends AbstractJUnit4SpringContextTests{
 	private ProducerService producerService;
 
 	@Test
-	public void send(){
+	public void sendText(){
 		String message = "Hello Queue Message.";
 		producerService.sendTextQueueMessage(message);
+	}
+	
+	/**
+	 * 测试多个订单
+	 */
+	//@Test
+	public void sendObject(){
+		OrderInfo info = null;
+		info = new OrderInfo((1 + new Random().nextInt(1000)), "Iphone", 5000);
+		producerService.sendObjectQueueMessage(info);
+		/*for(int i=1; i<100; i++) {
+			info = new OrderInfo((i + new Random().nextInt(1000)), "Iphone", 5000);
+			producerService.sendObjectQueueMessage(info);
+		}*/
 	}
 }

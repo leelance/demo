@@ -10,30 +10,37 @@
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd"
-		default-lazy-init="true">
+		default-lazy-init="false">
 	<!-- 自动扫描分包 -->
-	<context:component-scan base-package="com.lance.mq">
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
-	</context:component-scan>
+	<context:component-scan base-package="com.lance.mq"/>
 	
 	<!-- ActiveMQConnectionFactory -->
 	<bean id="activeMQConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
 		<constructor-arg index="0" value="tcp://127.0.0.1:61616"/>
+		<property name="trustedPackages">
+			<list>
+				<value>com.lance.mq</value>
+				<value>java.util</value>
+			</list>
+		</property>
 	</bean>
 	
 	<!-- 创建ConnectionFactory连接池 -->
 	<bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">
-		<property name="activeMQConnectionFactory" ref="activeMQConnectionFactory"/>
+		<property name="connectionFactory" ref="activeMQConnectionFactory"/>
 	</bean>
 	
 	<!-- CachingConnectionFactory -->
 	<bean id="connectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
-		<constructor-arg index="0" ref="activeMQConnectionFactory"/>
+		<constructor-arg index="0" ref="pooledConnectionFactory"/>
 	</bean>
 	
 	<!-- jmsTemplate -->
 	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
 		 <property name="connectionFactory" ref="connectionFactory"/>
+		 <property name="messageConverter">
+		 	<bean class="org.springframework.jms.support.converter.SimpleMessageConverter"/>
+		 </property>
 	</bean>
 	
 	<!-- ActiveMQQueue -->
@@ -43,10 +50,10 @@
 	
 	<!-- ActiveMQTopic -->
 	<bean id="activeMQTopic" class="org.apache.activemq.command.ActiveMQTopic">
-		<constructor-arg index="0" value="queue"/>
+		<constructor-arg index="0" value="topic"/>
 	</bean>
 	
-	<!-- Listener -->
+	<!-- Listener 
 	<bean id="consumerListener" class="com.lance.mq.ConsumerListener"/>
 	<bean id="messageListenerAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
 		<property name="delegate" ref="consumerListener"/>
@@ -58,4 +65,5 @@
 		<property name="destination" ref="activeMQQueue"/>
 		<property name="messageListener" ref="messageListenerAdapter"/>
 	</bean>
+	-->
 </beans>

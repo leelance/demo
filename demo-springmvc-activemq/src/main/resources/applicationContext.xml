@@ -16,7 +16,7 @@
 	
 	<!-- ActiveMQConnectionFactory -->
 	<bean id="activeMQConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
-		<constructor-arg index="0" value="tcp://192.168.100.108:61616"/>
+		<constructor-arg index="0" value="tcp://127.0.0.1:61616"/>
 		<property name="trustedPackages">
 			<list>
 				<value>com.lance.mq</value>

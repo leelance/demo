@@ -60,3 +60,82 @@ public class RedisCacheManager extends AbstractCacheManager {
 	}
 }
 ```
+
+## springmvc集成activemq[jmsTemplate], 详见demo-springmvc-activemq 生产者， 消费者demo-springmvc-activemq-consumer
+```
+<!-- ActiveMQConnectionFactory -->
+<bean id="activeMQConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+	<constructor-arg index="0" value="tcp://127.0.0.1:61616"/>
+	<property name="trustedPackages">
+		<list>
+			<value>com.lance.mq</value>
+			<value>java.util</value>
+		</list>
+	</property>
+</bean>
+
+<!-- 创建ConnectionFactory连接池 -->
+<bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">
+	<property name="connectionFactory" ref="activeMQConnectionFactory"/>
+</bean>
+
+<!-- CachingConnectionFactory -->
+<bean id="connectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+	<constructor-arg index="0" ref="pooledConnectionFactory"/>
+</bean>
+
+<!-- jmsTemplate -->
+<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+	 <property name="connectionFactory" ref="connectionFactory"/>
+	 <property name="messageConverter">
+	 	<bean class="org.springframework.jms.support.converter.SimpleMessageConverter"/>
+	 </property>
+</bean>
+
+<!-- ActiveMQQueue -->
+<bean id="activeMQQueue" class="org.apache.activemq.command.ActiveMQQueue">
+	<constructor-arg index="0" value="queue"/>
+</bean>
+
+<!-- ActiveMQTopic -->
+<bean id="activeMQTopic" class="org.apache.activemq.command.ActiveMQTopic">
+	<constructor-arg index="0" value="topic"/>
+</bean>
+```
+```
+<!-- ActiveMQConnectionFactory -->
+<bean id="activeMQConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+	<constructor-arg index="0" value="tcp://127.0.0.1:61616" />
+</bean>
+
+<!-- CachingConnectionFactory -->
+<bean id="connectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+	<constructor-arg index="0" ref="activeMQConnectionFactory" />
+</bean>
+
+<!-- ActiveMQQueue -->
+<bean id="activeMQQueue" class="org.apache.activemq.command.ActiveMQQueue">
+	<constructor-arg index="0" value="queue" />
+</bean>
+
+<!--  
+<bean id="consumerListener" class="com.lance.mq.ConsumerListener"/>
+<bean id="messageListenerAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+	<constructor-arg index="0" ref="consumerListener"/>
+    <property name="messageConverter">
+        <bean class="org.springframework.jms.support.converter.SimpleMessageConverter"/>
+    </property>
+</bean>
+<bean id="queueListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+	<property name="connectionFactory" ref="connectionFactory" />
+	<property name="destination" ref="activeMQQueue" />
+	<property name="messageListener" ref="messageListenerAdapter" />
+</bean>
+-->
+<bean id="consumerReturnListener" class="com.lance.mq.ConsumerReturnListener"/>
+<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+	<property name="connectionFactory" ref="connectionFactory" />
+	<property name="destination" ref="activeMQQueue" />
+	<property name="messageListener" ref="consumerReturnListener" />
+</bean>
+```

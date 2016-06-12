@@ -22,6 +22,10 @@ public class IndexController {
 	@RequestMapping("click")
 	public void click() {
 		String message = "Hello Queue Message. Date: "+DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss");
-		producerService.sendTextQueueMessage(message);
+		
+		//发送消息不返回值
+		//producerService.sendTextQueueMessage(message);
+		
+		producerService.sendTextQueueMessageAndReceive(message);
 	}
 }

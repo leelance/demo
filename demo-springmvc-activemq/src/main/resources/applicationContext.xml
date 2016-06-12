@@ -52,18 +52,4 @@
 	<bean id="activeMQTopic" class="org.apache.activemq.command.ActiveMQTopic">
 		<constructor-arg index="0" value="topic"/>
 	</bean>
-	
-	<!-- Listener 
-	<bean id="consumerListener" class="com.lance.mq.ConsumerListener"/>
-	<bean id="messageListenerAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
-		<property name="delegate" ref="consumerListener"/>
-		<property name="defaultListenerMethod" value="receiveMessage"/>
-		<property name="defaultResponseDestination" ref="activeMQQueue"/>
-	</bean>
-	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-		<property name="connectionFactory" ref="connectionFactory"/>
-		<property name="destination" ref="activeMQQueue"/>
-		<property name="messageListener" ref="messageListenerAdapter"/>
-	</bean>
-	-->
 </beans>

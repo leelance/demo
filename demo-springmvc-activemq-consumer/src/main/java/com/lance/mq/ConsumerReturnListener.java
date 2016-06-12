@@ -31,7 +31,7 @@ public class ConsumerReturnListener implements SessionAwareMessageListener<TextM
 		replyMessage.setJMSCorrelationID(message.getJMSCorrelationID());
 		producer.send(message.getJMSReplyTo(), replyMessage);
 		
-		logger.info("ConsumerReturnListener =====> receiveMsg: {}, replyMsg", message.getText(), replyMessage.getText());
+		logger.info("ConsumerReturnListener =====> receiveMsg: {}, replyMsg： {}", message.getText(), replyMessage.getText());
 		logger.info("TimeOut: {}", (System.currentTimeMillis() - startTime));
 	}
 }

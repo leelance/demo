@@ -25,19 +25,22 @@
 		</property>
 	</bean>
 	
-	<!-- 创建ConnectionFactory连接池 -->
+	<!-- 创建pooledConnectionFactory连接池, JmsTemlate每次发送消息都重新打开一个Connection -->
 	<bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">
 		<property name="connectionFactory" ref="activeMQConnectionFactory"/>
+		<property name="maxConnections" value="5"/>
 	</bean>
 	
-	<!-- CachingConnectionFactory -->
+	
+	<!-- CachingConnectionFactory 
 	<bean id="connectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
-		<constructor-arg index="0" ref="pooledConnectionFactory"/>
+		<constructor-arg index="0" ref="activeMQConnectionFactory"/>
 	</bean>
+	-->
 	
 	<!-- jmsTemplate -->
 	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
-		 <property name="connectionFactory" ref="connectionFactory"/>
+		 <property name="connectionFactory" ref="pooledConnectionFactory"/>
 		 <property name="messageConverter">
 		 	<bean class="org.springframework.jms.support.converter.SimpleMessageConverter"/>
 		 </property>

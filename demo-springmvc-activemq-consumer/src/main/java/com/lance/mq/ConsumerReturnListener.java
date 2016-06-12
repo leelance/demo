@@ -11,6 +11,11 @@ import org.springframework.jms.listener.SessionAwareMessageListener;
 
 import com.alibaba.fastjson.JSON;
 
+/**
+ * 实现SessionAwareMessageListener接口, 监听消息队列, 并通知消息收到成功
+ * @author Administrator
+ *
+ */
 public class ConsumerReturnListener implements SessionAwareMessageListener<TextMessage> {
 	Logger logger = LogManager.getLogger();
 

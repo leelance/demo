@@ -16,6 +16,7 @@ public class ConsumerReturnListener implements SessionAwareMessageListener<TextM
 
 	@Override
 	public void onMessage(TextMessage message, Session session) throws JMSException {
+		long startTime = System.currentTimeMillis();
 		logger.info("message: {}", JSON.toJSONString(message));
 		
 		//返回收到消息后通知
@@ -24,5 +25,8 @@ public class ConsumerReturnListener implements SessionAwareMessageListener<TextM
 		replyMessage.setText("SUCCESS");
 		replyMessage.setJMSCorrelationID(message.getJMSCorrelationID());
 		producer.send(message.getJMSReplyTo(), replyMessage);
+		
+		logger.info("ConsumerReturnListener =====> receiveMsg: {}, replyMsg", message.getText(), replyMessage.getText());
+		logger.info("TimeOut: {}", (System.currentTimeMillis() - startTime));
 	}
 }

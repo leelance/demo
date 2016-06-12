@@ -29,7 +29,8 @@
 	<bean id="activeMQQueue" class="org.apache.activemq.command.ActiveMQQueue">
 		<constructor-arg index="0" value="queue" />
 	</bean>
-
+	
+	<!--  
 	<bean id="consumerListener" class="com.lance.mq.ConsumerListener"/>
 	<bean id="messageListenerAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
 		<constructor-arg index="0" ref="consumerListener"/>
@@ -41,5 +42,12 @@
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="activeMQQueue" />
 		<property name="messageListener" ref="messageListenerAdapter" />
+	</bean>
+	-->
+	<bean id="consumerReturnListener" class="com.lance.mq.ConsumerReturnListener"/>
+	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="activeMQQueue" />
+		<property name="messageListener" ref="consumerReturnListener" />
 	</bean>
 </beans>

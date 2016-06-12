@@ -139,3 +139,23 @@ public class RedisCacheManager extends AbstractCacheManager {
 	<property name="messageListener" ref="consumerReturnListener" />
 </bean>
 ```
+## activemq针对未被消费者接受的数据 持久化到mysql数据配置, 需要在activemqlib下加入mysql包
+```
+<!-- MySQL DateBase -->
+<bean id="mysql-ds" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+  <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+  <property name="url" value="jdbc:mysql://localhost:3306/demo-schema?relaxAutoCommit=true"/>
+  <property name="username" value="root"/>
+  <property name="password" value="123456"/>
+  <property name="maxActive" value="200"/> 
+  <property name="poolPreparedStatements" value="true"/>
+</bean>
+<persistenceAdapter>  
+	<jdbcPersistenceAdapter dataSource="#mysql-ds"/>  
+</persistenceAdapter>  
+<!--
+<persistenceAdapter>
+   <kahaDB directory="${activemq.data}/kahadb"/>
+</persistenceAdapter>
+-->
+```

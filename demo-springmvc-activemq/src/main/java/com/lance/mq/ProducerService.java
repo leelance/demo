@@ -3,6 +3,7 @@ package com.lance.mq;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.Session;
+import javax.jms.TextMessage;
 
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.logging.log4j.LogManager;
@@ -39,9 +40,10 @@ public class ProducerService {
 	/**
 	 * 发送消息并处理消息返回值
 	 * @param message
+	 * @throws JMSException 
 	 */
-	public void sendTextQueueMessageAndReceive(final String message) {
-		Message tMessage = jmsTemplate.sendAndReceive(activeMQQueue, new MessageCreator(){
+	public String sendTextQueueMessageAndReceive(final String message) throws JMSException {
+		Message replyMessage = jmsTemplate.sendAndReceive(activeMQQueue, new MessageCreator(){
 
 			@Override
 			public Message createMessage(Session session) throws JMSException {
@@ -49,7 +51,9 @@ public class ProducerService {
 			}
 		});
 		
-		log.info("sendTextAndReceive: {}", JSON.toJSONString(tMessage));
+		log.info("sendTextAndReceive: {}", JSON.toJSONString(replyMessage));
+		TextMessage textMessage = (TextMessage)replyMessage;
+		return textMessage.getText();
 	}
 	
 	/**

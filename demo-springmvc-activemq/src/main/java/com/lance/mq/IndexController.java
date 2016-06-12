@@ -2,7 +2,11 @@ package com.lance.mq;
 
 import java.util.Date;
 
+import javax.jms.JMSException;
+
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class IndexController {
+	Logger logger = LogManager.getLogger(getClass());
 	@Autowired
 	private ProducerService producerService;
 	
@@ -26,6 +31,13 @@ public class IndexController {
 		//发送消息不返回值
 		//producerService.sendTextQueueMessage(message);
 		
-		producerService.sendTextQueueMessageAndReceive(message);
+		//发送消息带返回值
+		try {
+			String result = producerService.sendTextQueueMessageAndReceive(message);
+			logger.info("IndexController ====> result: {}, isSuccess: {}", result, result.equals("SUCCESS"));
+		} catch (JMSException e) {
+			e.printStackTrace();
+			logger.error("请求加入队列失败： {}", e.getMessage());
+		}
 	}
 }

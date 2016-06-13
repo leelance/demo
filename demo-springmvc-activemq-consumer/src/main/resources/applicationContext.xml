@@ -43,12 +43,25 @@
 		<property name="destination" ref="activeMQQueue" />
 		<property name="messageListener" ref="consumerObjectListener"/>
 		<property name="concurrency" value="10-50"/>
-		<!-- JMS事务, 默认false -->
+		<!-- JMS事务, 默认false; 详见AbstractPollingMessageListenerContainer -->
 		<property name="sessionTransacted" value="true"/>
+		
+		<!-- JTA针对分布式事务处理, 本平台执行数据库事务和JMS事务处理 
+		<property name="transactionManager" ref="jtaTransactionManager"/>
+		-->
 		<property name="messageConverter">
 			<bean class="org.springframework.jms.support.converter.SimpleMessageConverter"/>
 		</property>
 	</bean>
+	
+	<!-- jdbcTemplate or Mybatis_Mapper
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">  
+	    <property name="dataSource" ref="dataSource"/>  
+	</bean>
+	-->  
+  	
+	<bean id="jtaTransactionManager" class="org.springframework.transaction.jta.JtaTransactionManager"/>
+	<tx:annotation-driven transaction-manager="jtaTransactionManager"/>  
 	
 	<!-- 处理Text消息
 	<bean id="consumerListener" class="com.lance.mq.ConsumerListener"/>

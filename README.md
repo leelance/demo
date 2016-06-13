@@ -173,5 +173,12 @@ for (int i = 0; i < paramNames.length; i++){
 }
 for (String paramName: paramNames) {  
     logger.info("paramName: {}", paramName); 
-} 
+}
+
+//或者借助spirng提供的方法 直接用, 比较简单
+LocalVariableTableParameterNameDiscoverer parameterNameDiscoverer = new LocalVariableTableParameterNameDiscoverer();
+String[]names = parameterNameDiscoverer.getParameterNames(method);
+for (String name: names) {  
+    logger.info("LocalVariableTableParameterNameDiscoverer ==> name: {}", name); 
+}
 ```

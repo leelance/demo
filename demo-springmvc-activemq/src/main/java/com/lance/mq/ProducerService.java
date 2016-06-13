@@ -29,7 +29,6 @@ public class ProducerService {
 	 */
 	public void sendTextQueueMessage(final String message) {
 		jmsTemplate.send(activeMQQueue, new MessageCreator(){
-
 			@Override
 			public Message createMessage(Session session) throws JMSException {
 				return session.createTextMessage(message);
@@ -44,7 +43,6 @@ public class ProducerService {
 	 */
 	public String sendTextQueueMessageAndReceive(final String message) throws JMSException {
 		Message replyMessage = jmsTemplate.sendAndReceive(activeMQQueue, new MessageCreator(){
-
 			@Override
 			public Message createMessage(Session session) throws JMSException {
 				return session.createTextMessage(message);
@@ -59,8 +57,18 @@ public class ProducerService {
 	/**
 	 * 订单入队列
 	 * @param info
+	 * @throws JMSException 
 	 */
-	public void sendObjectQueueMessage(final OrderInfo info) {
-		jmsTemplate.convertAndSend(activeMQQueue, info);
+	public String sendObjectQueueMessage(final OrderInfo info) throws JMSException {
+		Message message = jmsTemplate.sendAndReceive(activeMQQueue, new MessageCreator() {
+			@Override
+			public Message createMessage(Session session) throws JMSException {
+				return session.createObjectMessage(info);
+			}
+		});
+		
+		log.info("sendTextAndReceive: {}", JSON.toJSONString(message));
+		TextMessage textMessage = (TextMessage)message;
+		return textMessage.getText();
 	}
 }

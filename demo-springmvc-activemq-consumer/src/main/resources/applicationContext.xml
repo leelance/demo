@@ -43,6 +43,8 @@
 		<property name="destination" ref="activeMQQueue" />
 		<property name="messageListener" ref="consumerObjectListener"/>
 		<property name="concurrency" value="10-50"/>
+		<!-- JMS事务, 默认false -->
+		<property name="sessionTransacted" value="true"/>
 		<property name="messageConverter">
 			<bean class="org.springframework.jms.support.converter.SimpleMessageConverter"/>
 		</property>

@@ -29,8 +29,19 @@
 	<bean id="activeMQQueue" class="org.apache.activemq.command.ActiveMQQueue">
 		<constructor-arg index="0" value="queue" />
 	</bean>
+
+	<!-- 接收订单对象 -->		
+	<bean id="consumerObjectListener" class="com.lance.mq.ConsumerObjectListener"/>
+	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="activeMQQueue" />
+		<property name="messageListener" ref="consumerObjectListener"/>
+		<property name="messageConverter">
+			<bean class="org.springframework.jms.support.converter.SimpleMessageConverter"/>
+		</property>
+	</bean>
 	
-	<!--  
+	<!-- 处理Text消息
 	<bean id="consumerListener" class="com.lance.mq.ConsumerListener"/>
 	<bean id="messageListenerAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
 		<constructor-arg index="0" ref="consumerListener"/>
@@ -44,10 +55,13 @@
 		<property name="messageListener" ref="messageListenerAdapter" />
 	</bean>
 	-->
+	
+	<!-- 处理消息并返回通知消息接收成功字符串 
 	<bean id="consumerReturnListener" class="com.lance.mq.ConsumerReturnListener"/>
 	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="activeMQQueue" />
 		<property name="messageListener" ref="consumerReturnListener" />
 	</bean>
+	-->
 </beans>

@@ -2,6 +2,8 @@ package com.lance.mq;
 
 import java.util.Random;
 
+import javax.jms.JMSException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
@@ -26,9 +28,10 @@ public class ProducerServiceTest extends AbstractJUnit4SpringContextTests{
 	
 	/**
 	 * 测试多个订单
+	 * @throws JMSException 
 	 */
 	//@Test
-	public void sendObject(){
+	public void sendObject() throws JMSException{
 		OrderInfo info = null;
 		info = new OrderInfo((1 + new Random().nextInt(1000)), "Iphone", 5000);
 		producerService.sendObjectQueueMessage(info);

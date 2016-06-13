@@ -147,7 +147,6 @@ public class RedisCacheManager extends AbstractCacheManager {
   <property name="url" value="jdbc:mysql://localhost:3306/demo-schema?relaxAutoCommit=true"/>
   <property name="username" value="root"/>
   <property name="password" value="123456"/>
-  <property name="maxActive" value="200"/> 
   <property name="poolPreparedStatements" value="true"/>
 </bean>
 <persistenceAdapter>  

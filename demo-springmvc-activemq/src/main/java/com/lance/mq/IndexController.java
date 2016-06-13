@@ -1,6 +1,7 @@
 package com.lance.mq;
 
 import java.util.Date;
+import java.util.Random;
 
 import javax.jms.JMSException;
 
@@ -31,9 +32,19 @@ public class IndexController {
 		//发送消息不返回值
 		//producerService.sendTextQueueMessage(message);
 		
-		//发送消息带返回值
+		/*发送消息带返回值
 		try {
 			String result = producerService.sendTextQueueMessageAndReceive(message);
+			logger.info("IndexController ====> result: {}, isSuccess: {}", result, result.equals("SUCCESS"));
+		} catch (JMSException e) {
+			e.printStackTrace();
+			logger.error("请求加入队列失败： {}", e.getMessage());
+		}*/
+		
+		/**发送消息对象*/
+		try {
+			OrderInfo info = new OrderInfo(new Random().nextInt(), message, new Random().nextFloat());
+			String result = producerService.sendObjectQueueMessage(info);
 			logger.info("IndexController ====> result: {}, isSuccess: {}", result, result.equals("SUCCESS"));
 		} catch (JMSException e) {
 			e.printStackTrace();

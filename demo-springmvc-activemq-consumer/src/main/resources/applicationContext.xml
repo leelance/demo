@@ -42,6 +42,7 @@
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="activeMQQueue" />
 		<property name="messageListener" ref="consumerObjectListener"/>
+		<property name="concurrency" value="10-50"/>
 		<property name="messageConverter">
 			<bean class="org.springframework.jms.support.converter.SimpleMessageConverter"/>
 		</property>

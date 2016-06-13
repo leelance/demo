@@ -6,6 +6,7 @@ import java.lang.reflect.Modifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
+import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 
 import javassist.ClassPool;
 import javassist.CtMethod;
@@ -69,5 +70,11 @@ public class GetMethodTest {
 		} catch (NotFoundException e) {
 			e.printStackTrace();
 		}
+		
+		LocalVariableTableParameterNameDiscoverer parameterNameDiscoverer = new LocalVariableTableParameterNameDiscoverer();
+		String[]names = parameterNameDiscoverer.getParameterNames(method);
+		for (String name: names) {  
+	    	logger.info("LocalVariableTableParameterNameDiscoverer ==> name: {}", name); 
+        }  
 	}
 }

@@ -158,3 +158,20 @@ public class RedisCacheManager extends AbstractCacheManager {
 </persistenceAdapter>
 -->
 ```
+###java反射获取参数名称,借助javaassist.jar包,详见demo-springmvc-activemq/src/test/java/com/lance/mq/GetMethodTest.java
+```
+ClassPool pool = ClassPool.getDefault();
+CtMethod ctMethod = pool.getMethod(getClass().getName(), "getName");
+MethodInfo methodInfo = ctMethod.getMethodInfo();
+CodeAttribute codeAttribute = methodInfo.getCodeAttribute();
+LocalVariableAttribute attr = (LocalVariableAttribute)codeAttribute.getAttribute(LocalVariableAttribute.tag);
+
+String[] paramNames = new String[ctMethod.getParameterTypes().length];  
+int pos = Modifier.isStatic(ctMethod.getModifiers()) ? 0 : 1; 
+for (int i = 0; i < paramNames.length; i++){
+    paramNames[i] = attr.variableName(i + pos);
+}
+for (String paramName: paramNames) {  
+    logger.info("paramName: {}", paramName); 
+} 
+```

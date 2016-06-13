@@ -23,6 +23,12 @@ public class ConsumerObjectListener implements SessionAwareMessageListener<Objec
 		Object obj = message.getObject();
 		OrderInfo info = (OrderInfo)obj;
 		logger.info("OrderInfo: {}", JSON.toJSONString(info));
+		
+		//测试事务回滚
+		if(info.getGoodsId() % 2 == 0) {
+			throw new RuntimeException("订单抛异常了, 事务要回滚了");
+		}
+		
 		//返回收到消息后通知
 		MessageProducer producer = session.createProducer(null);
 		TextMessage replyMessage = session.createTextMessage();

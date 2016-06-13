@@ -43,7 +43,7 @@ public class IndexController {
 		
 		/**发送消息对象*/
 		try {
-			OrderInfo info = new OrderInfo(new Random().nextInt(), message, new Random().nextFloat());
+			OrderInfo info = new OrderInfo(new Random().nextInt(100), message, new Random().nextFloat());
 			String result = producerService.sendObjectQueueMessage(info);
 			logger.info("IndexController ====> result: {}, isSuccess: {}", result, result.equals("SUCCESS"));
 		} catch (JMSException e) {

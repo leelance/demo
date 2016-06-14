@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com</groupId>
+		<artifactId>demo</artifactId>
+		<version>1.0</version>
+		<relativePath>../demo/pom.xml</relativePath>
+	</parent>
+
+	<artifactId>demo-springmvc-antlr</artifactId>
+	<packaging>war</packaging>
+	<name>demo-springmvc-antlr Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<antlr.version>4.5.3</antlr.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.antlr</groupId>
+			<artifactId>antlr4-runtime</artifactId>
+			<version>4.5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.12</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>demo-springmvc-antlr</finalName>
+		
+		<plugins>
+			<plugin>
+				<groupId>org.antlr</groupId>
+				<artifactId>antlr4-maven-plugin</artifactId>
+				<version>4.5.3</version>
+				<configuration>
+					<sourceDirectory>${basedir}</sourceDirectory>
+					<grammars>*.g4</grammars>
+					<arguments>
+	                    <argument>-visitor</argument>
+		                <argument>-Dlanguage=Java</argument>
+	                </arguments>
+					<outputDirectory>${project.build.directory}/generated-sources/java</outputDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>antlr4</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.10</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>target/generated-sources/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+		</plugins>
+	</build>
+</project>

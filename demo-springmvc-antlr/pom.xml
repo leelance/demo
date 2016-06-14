@@ -40,13 +40,13 @@
 				<artifactId>antlr4-maven-plugin</artifactId>
 				<version>4.5.3</version>
 				<configuration>
-					<sourceDirectory>${basedir}</sourceDirectory>
+					<sourceDirectory>${basedir}/src/main/antlr4</sourceDirectory>
 					<grammars>*.g4</grammars>
 					<arguments>
 	                    <argument>-visitor</argument>
 		                <argument>-Dlanguage=Java</argument>
 	                </arguments>
-					<outputDirectory>${project.build.directory}/generated-sources/java</outputDirectory>
+					<outputDirectory>${project.build.directory}/generated-sources/java/com/lance/antlr</outputDirectory>
 				</configuration>
 				<executions>
 					<execution>

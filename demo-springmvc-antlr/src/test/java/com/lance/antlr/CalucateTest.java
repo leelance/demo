@@ -13,9 +13,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
-import com.lance.antlr.calc.ExprLexer;
-import com.lance.antlr.calc.ExprParser;
-
 public class CalucateTest {
 	Logger logger = LogManager.getLogger(getClass());
 

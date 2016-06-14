@@ -18,6 +18,7 @@
     	<module>../demo-springmvc-bid</module>
     	<module>../demo-springmvc-activemq</module>
     	<module>../demo-springmvc-activemq-consumer</module>
+    	<module>../demo-springmvc-antlr</module>
   </modules>
 
 	<developers>

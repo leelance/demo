@@ -6,10 +6,6 @@
 
 grammar Field;
 
-@header{
-package com.lance.antlr;
-}
-
 field:
     name=Name NL
     (points NL)+

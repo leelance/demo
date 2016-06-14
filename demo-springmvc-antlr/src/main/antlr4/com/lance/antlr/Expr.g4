@@ -1,9 +1,5 @@
 grammar Expr;
 
-@header{
-package com.lance.antlr;   
-}
-
 equation
    : expression relop expression
    ;

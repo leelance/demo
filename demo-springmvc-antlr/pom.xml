@@ -46,7 +46,7 @@
 	                    <argument>-visitor</argument>
 		                <argument>-Dlanguage=Java</argument>
 	                </arguments>
-					<outputDirectory>${project.build.directory}/generated-sources/java/com/lance/antlr</outputDirectory>
+					<outputDirectory>${project.build.directory}/generated-sources/java</outputDirectory>
 				</configuration>
 				<executions>
 					<execution>

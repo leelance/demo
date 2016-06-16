@@ -14,7 +14,8 @@
 	<packaging>war</packaging>
 	<name>demo-springmvc-antlr Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-
+	
+	<!-- property -->
 	<properties>
 		<antlr.version>4.5.3</antlr.version>
 	</properties>

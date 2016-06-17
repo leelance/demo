@@ -65,7 +65,7 @@ public class WatcherTest extends AbstractJUnit4SpringContextTests{
 		}finally {
 			if(keeper != null) {
 				try {
-					keeper.close();
+					keeper.close();//关闭连接
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

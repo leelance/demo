@@ -25,7 +25,7 @@ public class WatcherTest extends AbstractJUnit4SpringContextTests{
 
 	@Test
 	public void main() {
-		String url = "10.0.2.216:2181,10.0.2.217:2181";
+		String url = "192.168.100.118:2181,192.168.100.119:2181";
 		int sessionTimeout = 2000;
 		ZooKeeper keeper = null;
 		

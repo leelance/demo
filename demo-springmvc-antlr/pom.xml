@@ -12,7 +12,7 @@
 
 	<artifactId>demo-springmvc-antlr</artifactId>
 	<packaging>war</packaging>
-	<name>demo-springmvc-antlr Maven Webapp</name>
+	<name>demo-springmvc-antlr</name>
 	<url>http://maven.apache.org</url>
 	
 	<!-- property -->

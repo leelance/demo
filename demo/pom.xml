@@ -20,6 +20,7 @@
     	<module>../demo-springmvc-activemq-consumer</module>
     	<module>../demo-springmvc-antlr</module>
     	<module>../demo-springmvc-zookeeper</module>
+    	<module>../demo-springmvc-dubbo-provider</module>
   </modules>
 
 	<developers>

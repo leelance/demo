@@ -18,9 +18,10 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 	
-	<!-- Dubbo Config -->
+	<!-- Dubbo Provider Configuration -->
 	<dubbo:application name="user-app"/>
 	<dubbo:registry address="zookeeper://192.168.100.118:2181?backup=192.168.100.119:2181"/>
 	<dubbo:protocol name="dubbo" port="20880"/>
 	<dubbo:service interface="com.lance.dubbo.service.UserService" ref="userServiceImpl" />
+	<dubbo:service interface="com.lance.dubbo.service.UserAccountService" ref="userAccountService"/>
 </beans>

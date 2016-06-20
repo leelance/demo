@@ -21,6 +21,7 @@
     	<module>../demo-springmvc-antlr</module>
     	<module>../demo-springmvc-zookeeper</module>
     	<module>../demo-springmvc-dubbo-provider</module>
+    	<module>../demo-springmvc-dubbo-consumer</module>
   </modules>
 
 	<developers>

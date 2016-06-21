@@ -1,17 +1,25 @@
 package com.lance.dubbo.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.lance.dubbo.modal.UserInfo;
 
-@Service("userServiceImpl")
+@Service("userService")
 public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserInfo findOne(int id) {
-		return null;
+		UserInfo info = new UserInfo();
+		info.setId(1);
+		info.setAccount("Klay");
+		info.setCreateTime(new Date());
+		info.setName("Klay Rooney");
+		info.setPassword("123456");
+		info.setUpdateTime(new Date());
+		return info;
 	}
 
 	@Override

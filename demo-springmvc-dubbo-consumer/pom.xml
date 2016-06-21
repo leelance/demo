@@ -47,7 +47,15 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.12</version>
 		</dependency>
+		<dependency>
+			<groupId>user-common</groupId>
+			<artifactId>user-common</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/user-common.jar</systemPath>
+		</dependency>
 	</dependencies>
+	
 	<build>
 		<finalName>demo-springmvc-dubbo-consumer</finalName>
 	</build>

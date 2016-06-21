@@ -14,14 +14,13 @@
 		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
 		default-lazy-init="true">
 	<!-- 自动扫描分包 -->
-	<context:component-scan base-package="com.lance.dubbo">
+	<context:component-scan base-package="com.lance.dubbo.comsumer">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 	
-	<!-- Dubbo Provider Configuration -->
-	<dubbo:application name="app-user-provider"/>
+	<!-- Dubbo Consumer Configuration -->
+	<dubbo:application name="app-user-consumer"/>
 	<dubbo:registry address="zookeeper://192.168.100.118:2181?backup=192.168.100.119:2181"/>
-	<dubbo:protocol name="dubbo" port="20880"/>
-	<dubbo:service interface="com.lance.dubbo.service.UserService" ref="userService" />
-	<dubbo:service interface="com.lance.dubbo.service.UserAccountService" ref="userAccountService"/>
+	<dubbo:reference id="userService" interface="com.lance.dubbo.service.UserService"/>
+	<dubbo:reference id="userAccountService" interface="com.lance.dubbo.service.UserAccountService"/>
 </beans>

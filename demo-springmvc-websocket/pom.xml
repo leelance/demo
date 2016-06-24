@@ -6,21 +6,15 @@
     <groupId>com</groupId>
     <artifactId>demo</artifactId>
     <version>1.0</version>
+    <relativePath>../demo/pom.xml</relativePath>
   </parent>
-  <groupId>com</groupId>
+ 
   <artifactId>demo-springmvc-websocket</artifactId>
-  <version>1.0</version>
   <packaging>war</packaging>
-  <name>demo-springmvc-websocket Maven Webapp</name>
+  <name>demo-springmvc-websocket</name>
   <url>http://maven.apache.org</url>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+  
+  
   <build>
     <finalName>demo-springmvc-websocket</finalName>
   </build>

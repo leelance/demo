@@ -22,6 +22,7 @@
     	<module>../demo-springmvc-zookeeper</module>
     	<module>../demo-springmvc-dubbo-provider</module>
     	<module>../demo-springmvc-dubbo-consumer</module>
+    <module>demo-springmvc-websocket</module>
   </modules>
 
 	<developers>

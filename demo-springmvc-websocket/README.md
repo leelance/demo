@@ -4,3 +4,4 @@ WebSocket它实现了浏览器与服务器全双工通信(full-duplex)，浏览�
 互相沟通的Header是很小的-大概只有 2 Bytes
 * Server Push
 服务器的推送，服务器不再被动的接收到浏览器的request之后才返回数据，而是在有新数据时就主动推送给浏览器
+* 功能尚未完成，移植到spring-boot-websocket中去

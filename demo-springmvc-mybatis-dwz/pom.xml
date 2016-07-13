@@ -12,7 +12,7 @@
 
 	<artifactId>demo-springmvc-mybatis-dwz</artifactId>
 	<packaging>war</packaging>
-	<name>demo::springMVC::MyBatis::DWZ</name>
+	<name>demo::springMVC::MyBatis:::DWZ</name>
 	<url>http://maven.apache.org</url>
 
 	<dependencies>

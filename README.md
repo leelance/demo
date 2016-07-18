@@ -2,7 +2,7 @@
 dwz加入kindeditor部分插件, 如: 富文本编辑器, 上传文件插件, 由于dwz集成的是uploadify flash类型插件
 当一个页面很多个上传附件插件时, 会出现页面渲染缓慢
 ## js
- ```
+ ```js
  //KindEditor.uploadbutton上传文件
     $("input.ke-input-text", $p).each(function() {
     	var $thiz = $(this), _id = $thiz.attr("id");
@@ -40,7 +40,7 @@ dwz加入kindeditor部分插件, 如: 富文本编辑器, 上传文件插件, �
 </div>
 ```
 ## springmvc配置shiro+redis[redisTemplate], 详见demo-springmvc-shiro
-```
+```xml
 <!-- RedisCache -->
 <bean id="redisCacheManager" class="com.lance.shiro.realm.RedisCacheManager"/>
 
